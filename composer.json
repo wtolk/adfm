@@ -1,0 +1,19 @@
+{
+    "name": "wtolk/adfm",
+    "description": "cms based on Laravel",
+    "type": "library",
+    "license": "no",
+    "authors": [
+        {
+            "name": "wtolk.ru",
+            "email": "web@wtolk.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Wtolk\\Adfm\\": "src/"
+        }
+    },
+    "require": {}
+}
