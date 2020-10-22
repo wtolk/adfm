@@ -1,27 +1,44 @@
 <?php
 
 
-namespace Wtolk\Adfm\Model;
+namespace Wtolk\Adfm\Models;
 
 
+use App\Helpers\Dev;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+use Wtolk\Adfm\Helpers\AttachmentTrait;
+use Wtolk\Adfm\Helpers\Sluggable;
 
-class Page
+class Page extends Model
 {
+    use HasFactory;
     use SoftDeletes;
-
+    use Sluggable;
 //    use MenuLinkable;
-//    use FilesTrait;
+    use AttachmentTrait;
+
+    /*Преобразовываем json атрибут к обычному массиву */
+    protected $casts = [
+        'meta' => 'array',
+        'options' => 'array',
+    ];
 
     protected $fillable = [
         'title',
-        'content_raw'
+        'slug',
+        'content',
+        'meta',
+        'options'
     ];
 
-//    public function image()
-//    {
-//        return $this->belongsTo('\ADFM\Model\File');
-//    }
+    public function image()
+    {
+        return $this->morphOne(File::class, 'model_relation', 'model_name', 'model_id')
+            ->where('model_relation', '=', 'image');
+    }
 //
 //    public function files()
 //    {
@@ -53,10 +70,7 @@ class Page
 //        $this->attributes['settings'] = json_encode($value);
 //    }
 //
-//    /*Преобразовываем json атрибут к обычному массиву */
-//    protected $casts = [
-//        'settings' => 'array',
-//    ];
+
 //
 //    /**
 //     * @return string ссылка для меню

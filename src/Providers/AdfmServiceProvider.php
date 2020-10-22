@@ -1,10 +1,10 @@
 <?php
 
-namespace Wtolk\Adfm;
+namespace Wtolk\Adfm\Providers;
 
 
+use App\Helpers\Dev;
 use Illuminate\Support\ServiceProvider;
-use Wtolk\Adfm\Commands\AdfmGenerator;
 
 
 class AdfmServiceProvider extends ServiceProvider
@@ -29,14 +29,12 @@ class AdfmServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             // publish config file
 
-            $this->commands([
-                AdfmGenerator::class,
-            ]);
         }
 
         \View::share('php_tags', '<?php');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
-        $this->loadViewsFrom(__DIR__.'/views', 'adfm');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'adfm');
         //
     }
 }
