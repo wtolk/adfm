@@ -15,5 +15,17 @@
             "Wtolk\\Adfm\\": "src/"
         }
     },
-    "require": {}
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wtolk\\Adfm\\AdfmServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "ajthinking/archetype": "*",
+        "jackiedo/dotenv-editor": "*",
+        "laravel/fortify": "*",
+        "spatie/laravel-permission": "*"
+    }
 }
