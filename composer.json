@@ -2,7 +2,7 @@
     "name": "wtolk/adfm",
     "description": "cms based on Laravel",
     "type": "library",
-    "license": "no",
+    "license": "MIT",
     "authors": [
         {
             "name": "wtolk.ru",
