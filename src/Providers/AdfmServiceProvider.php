@@ -7,6 +7,7 @@ use App\Helpers\Dev;
 use Illuminate\Support\ServiceProvider;
 use Wtolk\Adfm\Commands\CheckDBCommand;
 use Wtolk\Adfm\Commands\CreateDBCommand;
+use Wtolk\Adfm\Commands\InstallSetUpCommand;
 use Wtolk\Adfm\Commands\SetEnvCommand;
 
 
@@ -35,6 +36,7 @@ class AdfmServiceProvider extends ServiceProvider
                 CheckDBCommand::class,
                 SetEnvCommand::class,
                 CreateDBCommand::class,
+                InstallSetUpCommand::class,
             ]);
         }
         \Blade::directive('render_tree', function ($expression) {
