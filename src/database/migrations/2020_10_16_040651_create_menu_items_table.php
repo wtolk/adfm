@@ -17,13 +17,14 @@ class CreateMenuItemsTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('menu_id');
-            $table->integer('parent')->default(0);
+            $table->integer('parent_id')->default(0);
             $table->boolean('is_published')->default(true);
             $table->integer('position')->default(0);
             $table->string('link')->nullable();
             $table->string('model_name')->nullable();
             $table->integer('model_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
