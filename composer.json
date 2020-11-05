@@ -13,8 +13,8 @@
     "autoload": {
         "psr-4": {
             "Wtolk\\Adfm\\": "src/",
-            "Wtolk\\Adfm\\Database\\Seeders": "src/database/seeders/",
-            "Wtolk\\Adfm\\Database\\Factories": "src/database/factories/"
+            "Wtolk\\Adfm\\Database\\Seeders\\": "src/database/seeders/",
+            "Wtolk\\Adfm\\Database\\Factories\\": "src/database/factories/"
         }
     },
     "extra": {
