@@ -3,9 +3,11 @@
 namespace Wtolk\Adfm\Controllers\Screens;
 
 use App\Helpers\Dev;
+use Wtolk\Adfm\Models\MenuItem;
 use Wtolk\Crud\Form\Column;
 use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Summernote;
+use Wtolk\Crud\Form\TreeElements;
 use Wtolk\Crud\FormPresenter;
 use Wtolk\Adfm\Models\Menu;
 use Wtolk\Crud\Form\Input;
@@ -78,9 +80,11 @@ class MenuScreen
         $screen->form->layout('form-edit')->source([
             'menu' => Menu::findOrFail($screen->request->route('id'))
         ]);
+//        dd(Menu::findOrFail(1)->links[0]->children);
         $screen->form->title = 'Редактирование menu';
         $screen->form->route = route('adfm.menus.update', $screen->form->source['menu']->id);
         $screen->form->columns = self::getFields();
+        $screen->form->columns[1]->fields[0]->field_value = $screen->form->source['menu']->links;
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->route('adfm.menus.update')->submit(),
             Button::make('Удалить')->icon('trash')->route('adfm.menus.destroy')->canSee($screen->form->isModelExists)
@@ -97,8 +101,13 @@ class MenuScreen
                     ->placeholder('Например главное меню'),
                 Input::make('menu.slug')
                     ->title('Синоним')
-                    ->placeholder('Заполняется автоматически'),
-            ])
+                    ->placeholder('Заполняется автоматически')
+            ])->class('col col-md-6'),
+            Column::make([
+                TreeElements::make('menu.links')->title('Пункты меню')->link(function ($model) {
+                    echo Link::make('<i class="fas fa fa-pen-square"></i>')->route('adfm.menuitems.edit', ['id' => $model->id])->render();
+                })
+            ])->class('col col-md-6')
         ];
     }
 

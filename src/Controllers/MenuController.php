@@ -2,10 +2,12 @@
 
 namespace Wtolk\Adfm\Controllers;
 
+use App\Helpers\Dev;
 use App\Http\Controllers\Controller;
 use Wtolk\Adfm\Controllers\Screens\MenuScreen;
 use Illuminate\Http\Request;
 use Wtolk\Adfm\Models\Menu;
+use Wtolk\Adfm\Models\MenuItem;
 
 class MenuController extends Controller
 {
@@ -44,6 +46,9 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         $item = Menu::findOrFail($id);
+        if ($request->exists('links')) {
+            MenuItem::syncHierarchy($request->all()['links']);
+        }
         $item->fill($request->all()['menu'])->save();
         return redirect()->route('adfm.menus.index');
     }
