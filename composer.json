@@ -12,13 +12,15 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Wtolk\\Adfm\\": "src/"
+            "Wtolk\\Adfm\\": "src/",
+            "Wtolk\\Adfm\\Database\\Seeders": "src/database/seeders/",
+            "Wtolk\\Adfm\\Database\\Factories": "src/database/factories/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Wtolk\\Adfm\\AdfmServiceProvider"
+                "Wtolk\\Adfm\\Providers\\AdfmServiceProvider"
             ]
         }
     },
