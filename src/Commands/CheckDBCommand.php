@@ -10,7 +10,7 @@ use Wtolk\Crud\Generator;
 class CheckDBCommand extends Command
 {
 
-    protected $signature = 'check_db {db : Имя базы данных}' ;
+    protected $signature = 'adfm:check_db {db : Имя базы данных}' ;
     protected $description = 'Проверяет существует ли база данных';
 
     public function __construct()
