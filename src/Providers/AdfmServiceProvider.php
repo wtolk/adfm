@@ -5,6 +5,9 @@ namespace Wtolk\Adfm\Providers;
 
 use App\Helpers\Dev;
 use Illuminate\Support\ServiceProvider;
+use Wtolk\Adfm\Commands\CheckDBCommand;
+use Wtolk\Adfm\Commands\CreateDBCommand;
+use Wtolk\Adfm\Commands\SetEnvCommand;
 
 
 class AdfmServiceProvider extends ServiceProvider
@@ -28,13 +31,21 @@ class AdfmServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             // publish config file
-
+            $this->commands([
+                CheckDBCommand::class,
+                SetEnvCommand::class,
+                CreateDBCommand::class,
+            ]);
         }
+        \Blade::directive('render_tree', function ($expression) {
+            return $expression;
+        });
+
+
 
         \View::share('php_tags', '<?php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/../routes.php');
         $this->loadViewsFrom(__DIR__ . '/../views', 'adfm');
-        //
     }
 }
