@@ -47,7 +47,8 @@ class AdfmServiceProvider extends ServiceProvider
 
         \View::share('php_tags', '<?php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../admin-routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../public-routes.php');
         $this->loadViewsFrom(__DIR__ . '/../views', 'adfm');
     }
 }
