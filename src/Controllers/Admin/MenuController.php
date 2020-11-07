@@ -1,10 +1,10 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers;
+namespace Wtolk\Adfm\Controllers\Admin;
 
 use App\Helpers\Dev;
 use App\Http\Controllers\Controller;
-use Wtolk\Adfm\Controllers\Screens\MenuScreen;
+use Wtolk\Adfm\Controllers\Admin\Screens\MenuScreen;
 use Illuminate\Http\Request;
 use Wtolk\Adfm\Models\Menu;
 use Wtolk\Adfm\Models\MenuItem;

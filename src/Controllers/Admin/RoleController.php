@@ -1,9 +1,9 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers;
+namespace Wtolk\Adfm\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wtolk\Adfm\Controllers\Screens\RoleScreen;
+use Wtolk\Adfm\Controllers\Admin\Screens\RoleScreen;
 use Illuminate\Http\Request;
 use Wtolk\Adfm\Models\Role;
 
@@ -12,6 +12,10 @@ class RoleController extends Controller
 
     public function index()
     {
+//        phpinfo();
+//        die;
+//        \Illuminate\Database\Schema\MySqlBuilder::class;
+//        \Schema::setConnection();
         RoleScreen::index();
     }
 

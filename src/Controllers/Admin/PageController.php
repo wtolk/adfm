@@ -1,9 +1,9 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers;
+namespace Wtolk\Adfm\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Screens\Adfm\PageScreen;
+use Wtolk\Adfm\Controllers\Admin\Screens\PageScreen;
 use Illuminate\Http\Request;
 use Wtolk\Adfm\Models\Page;
 

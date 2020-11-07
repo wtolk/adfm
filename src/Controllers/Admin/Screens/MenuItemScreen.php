@@ -1,6 +1,6 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Screens;
+namespace Wtolk\Adfm\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
 use Wtolk\Crud\Form\Column;
