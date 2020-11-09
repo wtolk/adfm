@@ -1,6 +1,6 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Admin\Screens;
+namespace App\Adfm\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
 use Wtolk\Adfm\Models\MenuItem;
@@ -9,7 +9,7 @@ use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\Form\TreeElements;
 use Wtolk\Crud\FormPresenter;
-use Wtolk\Adfm\Models\Menu;
+use App\Adfm\Models\Menu;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;

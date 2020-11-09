@@ -1,14 +1,12 @@
 <?php
-namespace Wtolk\Adfm\Helpers;
+namespace App\Adfm\Helpers;
 
 use App\Helpers\Dev;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Whoops\Exception\ErrorException;
-use Wtolk\Adfm\Events\ModelWasFilled;
-use Wtolk\Adfm\Models\File;
+use App\Adfm\Models\File;
 use Symfony\Component\HttpFoundation\File\File as RawFile;
 
 trait AttachmentTrait

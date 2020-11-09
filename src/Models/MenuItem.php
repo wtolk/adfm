@@ -1,12 +1,12 @@
 <?php
-namespace Wtolk\Adfm\Models;
+namespace App\Adfm\Models;
 
 use App\Helpers\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use Wtolk\Adfm\Helpers\AttachmentTrait;
+use App\Adfm\Helpers\AttachmentTrait;
 
 /**
  * Wtolk\Adfm\Models\MenuItem

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Admin\Screens;
+namespace App\Adfm\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
 use Wtolk\Crud\Form\Column;
@@ -10,8 +10,8 @@ use Wtolk\Crud\Form\Relation;
 use Wtolk\Crud\Form\Select;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\FormPresenter;
-use Wtolk\Adfm\Models\MenuItem;
-use Wtolk\Adfm\Models\Menu;
+use App\Adfm\Models\MenuItem;
+use App\Adfm\Models\Menu;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\Checkbox;
 use Wtolk\Crud\Form\TableField;

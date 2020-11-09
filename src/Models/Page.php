@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Wtolk\Adfm\Models;
+namespace App\Adfm\Models;
 
 
 use App\Helpers\Dev;
@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-use Wtolk\Adfm\Helpers\AttachmentTrait;
-use Wtolk\Adfm\Helpers\Sluggable;
+use App\Adfm\Helpers\AttachmentTrait;
+use App\Adfm\Helpers\Sluggable;
 
 /**
  * Wtolk\Adfm\Models\Page

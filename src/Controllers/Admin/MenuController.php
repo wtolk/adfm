@@ -1,13 +1,12 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Admin;
+namespace App\Adfm\Controllers\Admin;
 
-use App\Helpers\Dev;
 use App\Http\Controllers\Controller;
-use Wtolk\Adfm\Controllers\Admin\Screens\MenuScreen;
+use App\Adfm\Controllers\Admin\Screens\MenuScreen;
 use Illuminate\Http\Request;
-use Wtolk\Adfm\Models\Menu;
-use Wtolk\Adfm\Models\MenuItem;
+use App\Adfm\Models\Menu;
+use App\Adfm\Models\MenuItem;
 
 class MenuController extends Controller
 {

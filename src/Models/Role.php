@@ -1,8 +1,8 @@
 <?php
-namespace Wtolk\Adfm\Models;
+namespace App\Adfm\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Wtolk\Adfm\Helpers\AttachmentTrait;
+use App\Adfm\Helpers\AttachmentTrait;
 
 class Role extends \Spatie\Permission\Models\Role
 {

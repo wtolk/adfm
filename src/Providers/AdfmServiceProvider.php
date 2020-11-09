@@ -43,12 +43,17 @@ class AdfmServiceProvider extends ServiceProvider
             return $expression;
         });
 
-
+        $this->publishes([
+            __DIR__.'/../Controllers' => app_path('Adfm/Controllers'),
+            __DIR__.'/../Models' => app_path('Adfm/Models'),
+            __DIR__.'/../views' => app_path('Adfm/views'),
+            __DIR__.'/../Helpers' => app_path('Adfm/Helpers'),
+        ]);
 
         \View::share('php_tags', '<?php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/../admin-routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../public-routes.php');
-        $this->loadViewsFrom(__DIR__ . '/../views', 'adfm');
+        $this->loadViewsFrom(app_path('Adfm/views'), 'adfm');
     }
 }

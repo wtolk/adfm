@@ -1,11 +1,11 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Admin;
+namespace App\Adfm\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wtolk\Adfm\Controllers\Admin\Screens\PageScreen;
+use App\Adfm\Controllers\Admin\Screens\PageScreen;
 use Illuminate\Http\Request;
-use Wtolk\Adfm\Models\Page;
+use App\Adfm\Models\Page;
 
 class PageController extends Controller
 {

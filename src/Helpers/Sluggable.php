@@ -1,5 +1,5 @@
 <?php
-namespace Wtolk\Adfm\Helpers;
+namespace App\Adfm\Helpers;
 
 use Illuminate\Support\Str;
 

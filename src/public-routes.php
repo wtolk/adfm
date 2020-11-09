@@ -1,5 +1,6 @@
 <?php
 
-Route::group(['namespace' => 'Wtolk\Adfm\Controllers\Site'], function () {
-    Route::get('/r', 'PageController@showMainPage')->name('adfm.main-page');
+Route::group(['namespace' => 'App\Adfm\Controllers\Site'], function () {
+    Route::get('/', 'PageController@showMainPage')->name('adfm.show.main-page');
+    Route::get('/{slug}', 'PageController@showPage')->name('adfm.show.page');
 });

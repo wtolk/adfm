@@ -1,10 +1,10 @@
 <?php
-namespace Wtolk\Adfm\Models;
+namespace App\Adfm\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wtolk\Adfm\Helpers\Sluggable;
+use App\Adfm\Helpers\Sluggable;
 
 /**
  * Wtolk\Adfm\Models\Menu

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wtolk\Adfm\Models;
+namespace App\Adfm\Models;
 
 use App\Helpers\Dev;
 use Illuminate\Contracts\Filesystem\Filesystem;

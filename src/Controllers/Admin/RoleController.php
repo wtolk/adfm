@@ -1,11 +1,11 @@
 <?php
 
-namespace Wtolk\Adfm\Controllers\Admin;
+namespace App\Adfm\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wtolk\Adfm\Controllers\Admin\Screens\RoleScreen;
+use App\Adfm\Controllers\Admin\Screens\RoleScreen;
 use Illuminate\Http\Request;
-use Wtolk\Adfm\Models\Role;
+use App\Adfm\Models\Role;
 
 class RoleController extends Controller
 {
