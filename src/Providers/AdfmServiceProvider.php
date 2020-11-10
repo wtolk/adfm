@@ -48,7 +48,7 @@ class AdfmServiceProvider extends ServiceProvider
             __DIR__.'/../Models' => app_path('Adfm/Models'),
             __DIR__.'/../views' => app_path('Adfm/views'),
             __DIR__.'/../Helpers' => app_path('Adfm/Helpers'),
-//            __DIR__.'/../database/migrations' => app_path('../database/migration'),
+            __DIR__.'/../database/migrations' => app_path('../database/migration'),
         ]);
 
         \View::share('php_tags', '<?php');
