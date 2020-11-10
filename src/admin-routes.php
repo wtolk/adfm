@@ -1,6 +1,6 @@
 <?php
 
-Route::prefix('/admin')->namespace(['namespace' => 'App\Adfm\Controllers\Admin'])->group(function () {
+Route::prefix('/admin')->namespace('App\Adfm\Controllers\Admin')->group(function () {
 
 
         Route::get('/pages', 'PageController@index')->name('adfm.pages.index');
@@ -10,7 +10,7 @@ Route::prefix('/admin')->namespace(['namespace' => 'App\Adfm\Controllers\Admin']
         Route::match(['put', 'patch'],'/pages/{id}', 'PageController@update')->name('adfm.pages.update');
         Route::delete('/pages/{id}', 'PageController@destroy')->name('adfm.pages.destroy');
 //Route::get('/pages/{id}/clone', 'PageController@clone');
-    
+
 
     /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
 
