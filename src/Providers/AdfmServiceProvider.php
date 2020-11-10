@@ -48,11 +48,11 @@ class AdfmServiceProvider extends ServiceProvider
             __DIR__.'/../Models' => app_path('Adfm/Models'),
             __DIR__.'/../views' => app_path('Adfm/views'),
             __DIR__.'/../Helpers' => app_path('Adfm/Helpers'),
-            __DIR__.'/../database/migrations' => app_path('../database/migration'),
+            __DIR__.'/../database/migrations' => app_path('../database/migrations'),
         ]);
 
         \View::share('php_tags', '<?php');
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+//        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/../admin-routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../public-routes.php');
         $this->loadViewsFrom(app_path('Adfm/views'), 'adfm');
