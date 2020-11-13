@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class InstallSetUpCommand extends Command
 {
 
-    protected $signature = 'adfm:setup ' ;
+    protected $signature = 'adfm:setup' ;
     protected $description = 'Делает первичную настройку';
 
     public function __construct()

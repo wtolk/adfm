@@ -1,6 +1,6 @@
 <?php
 
-Route::prefix('/admin')->namespace('App\Adfm\Controllers\Admin')->group(function () {
+Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Adfm\Controllers\Admin')->group(function () {
 
 
         Route::get('/pages', 'PageController@index')->name('adfm.pages.index');
@@ -42,6 +42,6 @@ Route::prefix('/admin')->namespace('App\Adfm\Controllers\Admin')->group(function
         Route::delete('/roles/{id}', 'RoleController@destroy')->name('adfm.roles.destroy');
 
 });
-Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
+//Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
 
 
