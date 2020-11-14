@@ -18,12 +18,12 @@ class InstallSetUpCommand extends Command
     public $start_permissions = [
         'page.create', 'page.edit', 'page.delete', 'page.*',
         'menu.create', 'menu.edit', 'menu.delete', 'menu.*',
-        'menu_item.create', 'menu_item.edit', 'menu_item.delete', 'menu_item.*',
+        'menuitem.create', 'menuitem.edit', 'menuitem.delete', 'menuitem.*',
         'role.create', 'role.edit', 'role.delete', 'role.*'
     ];
 
     public $start_roles = [
-        'root', 'manager'
+        'root', 'admin'
     ];
 
     public function __construct()
