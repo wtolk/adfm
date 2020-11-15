@@ -10,6 +10,7 @@ use Wtolk\Crud\Form\Checkbox;
 use Wtolk\Crud\Form\Column;
 use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Link;
+use Wtolk\Crud\Form\MultiFile;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\FormPresenter;
@@ -103,7 +104,9 @@ class PageScreen
 
                 Summernote::make('page.content')->title('Содержимое'),
 
-                File::make('page.image')->title('Изображение')
+                File::make('page.image')->title('Изображение') ,
+
+                MultiFile::make('page.files')->title('Прикрепленные документы')
             ]),
             Column::make([
                 Input::make('page.slug')

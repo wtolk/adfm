@@ -73,11 +73,12 @@ class Page extends Model
         return $this->morphOne(File::class, 'model_relation', 'model_name', 'model_id')
             ->where('model_relation', '=', 'image');
     }
-//
-//    public function files()
-//    {
-//        return $this->morphMany('\ADFM\Model\File', 'entity');
-//    }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'model_relation', 'model_name', 'model_id')
+            ->where('model_relation', '=', 'files')->orderBy('sort');
+    }
 //
 //    public function link()
 //    {
