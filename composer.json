@@ -28,6 +28,7 @@
         "ajthinking/archetype": "*",
         "jackiedo/dotenv-editor": "*",
         "laravel/fortify": "*",
+        "ralouphie/mimey": "*",
         "spatie/laravel-permission": "*"
     }
 }
