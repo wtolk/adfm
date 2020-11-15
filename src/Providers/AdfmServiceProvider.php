@@ -4,6 +4,8 @@ namespace Wtolk\Adfm\Providers;
 
 
 use App\Helpers\Dev;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Wtolk\Adfm\Commands\CheckDBCommand;
@@ -78,6 +80,11 @@ class AdfmServiceProvider extends ServiceProvider
         });
         Fortify::resetPasswordView(function () {
             return view('crud::auth.reset-password');
+        });
+
+        // Разрешаем root роли любые права
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('root') ? true : null;
         });
     }
 
