@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mimey\MimeTypes;
+use Whoops\Exception\ErrorException;
 
 /**
  * Wtolk\Adfm\Models\File
@@ -70,7 +71,7 @@ class File extends Model
     protected $mimes;
 
 
-    protected $disk = 'yandex-cloud';
+    protected $disk;
 
     protected $group;
 
@@ -98,6 +99,7 @@ class File extends Model
     public static function make(UploadedFile $file)
     {
         $item = new self();
+        $item->disk = env('DEFAULT_FILE_STORAGE');
         $item->file = $file;
         $item->mimes = new MimeTypes();
         $item->storage = Storage::disk($item->disk);
@@ -111,7 +113,16 @@ class File extends Model
 
     public function getPath(): string
     {
-        return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
+        if ($this->disk == 'yandex-cloud') {
+            if (empty(env('YANDEX_STORAGE_FOLDER'))) {
+                throw new ErrorException('Нужно задать папку для yandex storage вида site.ru в файле .env
+                параметр - YANDEX_STORAGE_FOLDER или указать локальное хранилище', 500);
+            }
+            return isset($this->path) ? $this->path : env('YANDEX_STORAGE_FOLDER').'/user_files/'.date('Y/m/d', time());
+        } else {
+            return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
+        }
+
     }
 
     public function getUrl()
