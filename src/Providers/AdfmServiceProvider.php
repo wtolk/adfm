@@ -53,8 +53,14 @@ class AdfmServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations' => app_path('../database/migrations'),
         ]);
 
-        $this->loadRoutesFrom(app_path('Adfm/routes') . '/admin-routes.php');
-        $this->loadRoutesFrom(app_path('Adfm/routes') . '/public-routes.php');
+        if (file_exists(app_path('Adfm/routes') . '/admin-routes.php')) {
+            $this->loadRoutesFrom(app_path('Adfm/routes') . '/admin-routes.php');
+            $this->loadRoutesFrom(app_path('Adfm/routes') . '/public-routes.php');
+        } else {
+            $this->loadRoutesFrom(__DIR__.'/../routes' . '/admin-routes.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes' . '/public-routes.php');
+        }
+
         $this->loadViewsFrom(app_path('Adfm/views'), 'adfm');
 
         $this->registerFortifySettings();
