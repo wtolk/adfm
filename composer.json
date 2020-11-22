@@ -30,6 +30,7 @@
         "laravel/fortify": "*",
         "ralouphie/mimey": "*",
         "spatie/laravel-permission": "*",
-        "league/flysystem-aws-s3-v3": "*"
+        "league/flysystem-aws-s3-v3": "*",
+        "kint-php/kint": "*"
     }
 }
