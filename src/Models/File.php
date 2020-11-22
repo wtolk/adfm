@@ -60,7 +60,7 @@ use Mimey\MimeTypes;
 class File extends Model
 {
     protected $table = 'adfm_attachments';
-
+    protected $appends = ['url'];
     /**
      * @var UploadedFile
      */
@@ -70,7 +70,7 @@ class File extends Model
     protected $mimes;
 
 
-    protected $disk = 'public';
+    protected $disk = 'yandex-cloud';
 
     protected $group;
 
@@ -99,7 +99,6 @@ class File extends Model
     {
         $item = new self();
         $item->file = $file;
-        $item->time = time();
         $item->mimes = new MimeTypes();
         $item->storage = Storage::disk($item->disk);
         return $item;
@@ -107,17 +106,22 @@ class File extends Model
 
     public function name(): string
     {
-        return sha1($this->time.$this->file->getClientOriginalName());
+        return sha1(time().$this->file->getClientOriginalName());
     }
 
-    public function path(): string
+    public function getPath(): string
     {
-        return date('Y/m/d', $this->time);
+        return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
     }
 
     public function getUrl()
     {
-        return Storage::disk($this->disk)->url($this->name.'.'.$this->extension);
+        return Storage::disk($this->disk)->url($this->getPath().$this->name.'.'.$this->extension);
+    }
+
+    public function getUrlAttribute()
+    {
+        return $this->getUrl();
     }
 
     public function extension(): string
@@ -135,6 +139,7 @@ class File extends Model
      */
     public function hash(): string
     {
+//        \App\Adfm\Helpers\Dev::dd($this->file->getPath());
         return sha1_file($this->file->path());
     }
 
@@ -168,7 +173,7 @@ class File extends Model
             'original_name' => $this->file->getClientOriginalName(),
             'sort'          => isset($this->file->sort) ? $this->file->sort : 0,
             'size'          => $this->file->getSize(),
-            'path'          => Str::finish($this->path(), '/'),
+            'path'          => Str::finish($this->getPath(), '/'),
             'disk'          => $this->disk,
             'model_name'    => $this->model_name,
             'model_id'    => $this->model_id,
@@ -180,7 +185,7 @@ class File extends Model
         $attachment = $this->getMatchesHash();
         if ($attachment === null) {
 //            dd($this->file, $this->file->getClientOriginalName());
-            $this->storage->putFileAs('files', $this->file, $this->name().'.'.$this->extension());
+            $this->storage->putFileAs($this->getPath(), $this->file, $this->name().'.'.$this->extension());
             return $this->save();
         }
 

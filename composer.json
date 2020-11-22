@@ -29,6 +29,7 @@
         "jackiedo/dotenv-editor": "*",
         "laravel/fortify": "*",
         "ralouphie/mimey": "*",
-        "spatie/laravel-permission": "*"
+        "spatie/laravel-permission": "*",
+        "league/flysystem-aws-s3-v3": "*"
     }
 }
