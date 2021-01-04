@@ -33,7 +33,7 @@ class PageScreen
     public static function index()
     {
         $screen = new self();
-        $screen->form->layout('table-list')->source([
+        $screen->form->template('table-list')->source([
             'pages' => Page::paginate(50)
         ]);
 
@@ -62,7 +62,7 @@ class PageScreen
     {
         $screen = new self();
         $screen->form->isModelExists = false;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
             'page' => new Page()
         ]);
         $screen->form->title = 'Создание страницы';
@@ -80,7 +80,7 @@ class PageScreen
     {
         $screen = new self();
         $screen->form->isModelExists = true;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
                 'page' => Page::findOrFail($screen->request->route('id'))
         ]);
         $screen->form->title = 'Редактирование страницы';

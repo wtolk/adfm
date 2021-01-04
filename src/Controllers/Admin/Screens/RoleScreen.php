@@ -32,7 +32,7 @@ class RoleScreen
     public static function index()
     {
         $screen = new self();
-        $screen->form->layout('table-list')->source([
+        $screen->form->template('table-list')->source([
             'roles' => Role::paginate(50)
         ]);
 //        dd(Role::paginate(50));
@@ -60,7 +60,7 @@ class RoleScreen
     {
         $screen = new self();
         $screen->form->isModelExists = false;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
             'role' => new Role()
         ]);
         $screen->form->title = 'Создание role';
@@ -78,7 +78,7 @@ class RoleScreen
     {
         $screen = new self();
         $screen->form->isModelExists = true;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
             'role' => Role::findOrFail($screen->request->route('id'))
         ]);
         $screen->form->title = 'Редактирование role';

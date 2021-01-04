@@ -34,7 +34,7 @@ class MenuItemScreen
     public static function index()
     {
         $screen = new self();
-        $screen->form->layout('table-list')->source([
+        $screen->form->template('table-list')->source([
             'menuitems' => MenuItem::paginate(50)
         ]);
 
@@ -62,7 +62,7 @@ class MenuItemScreen
     {
         $screen = new self();
         $screen->form->isModelExists = false;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
             'menuitem' => new MenuItem()
         ]);
         $screen->form->title = 'Создание menuitem';
@@ -80,7 +80,7 @@ class MenuItemScreen
     {
         $screen = new self();
         $screen->form->isModelExists = true;
-        $screen->form->layout('form-edit')->source([
+        $screen->form->template('form-edit')->source([
             'menuitem' => MenuItem::findOrFail($screen->request->route('id'))
         ]);
         $item = MenuItem::findOrFail($screen->request->route('id'));
