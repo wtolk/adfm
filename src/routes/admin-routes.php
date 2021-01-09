@@ -25,7 +25,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Adfm\Contro
     /* Роуты админки сгенерированные автоматически для Wtolk\Adfm\Controllers */
 
         Route::get('/menuitems', 'MenuItemController@index')->name('adfm.menuitems.index');
-        Route::get('/menuitems/create', 'MenuItemController@create')->name('adfm.menuitems.create');
+        Route::get('/menuitems/create/{menu_id?}', 'MenuItemController@create')->name('adfm.menuitems.create');
         Route::post('/menuitems', 'MenuItemController@store')->name('adfm.menuitems.store');
         Route::get('/menuitems/{id}/edit', 'MenuItemController@edit')->name('adfm.menuitems.edit');
         Route::match(['put', 'patch'],'/menuitems/{id}', 'MenuItemController@update')->name('adfm.menuitems.update');

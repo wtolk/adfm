@@ -27,7 +27,7 @@ class MenuItemController extends Controller
     {
         $item = new MenuItem();
         $item->fill($request->all()['menuitem'])->save();
-        return redirect()->route('adfm.menuitems.index');
+        return redirect()->route('adfm.menus.edit', ['id' => $item->menu_id]);
     }
 
     /**
@@ -45,7 +45,7 @@ class MenuItemController extends Controller
     {
         $item = MenuItem::findOrFail($id);
         $item->fill($request->all()['menuitem'])->save();
-        return redirect()->route('adfm.menuitems.index');
+        return redirect()->route('adfm.menus.edit', ['id' => $item->menu_id]);
     }
 
     /**
@@ -53,7 +53,8 @@ class MenuItemController extends Controller
      */
     public function destroy($id)
     {
+        $item = MenuItem::findOrFail($id);
         MenuItem::destroy($id);
-        return redirect()->route('adfm.menuitems.index');
+        return redirect()->route('adfm.menus.edit', ['id' => $item->menu_id]);
     }
 }

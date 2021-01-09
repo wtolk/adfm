@@ -114,7 +114,7 @@ class MenuItemScreen
                     ]
                 )->title('Вопрос')->empty('Нет выбора'),
                 Relation::make('menuitem.menu')->title('Выберите меню')
-                    ->options( Menu::all()->pluck('title', 'id')->toArray()),
+                    ->options( Menu::all()->pluck('title', 'id')->toArray())->defaultValue((int) request()->route('menu_id')),
                 Cropper::make('menuitem.image')->title('Изображение')
             ])
         ];

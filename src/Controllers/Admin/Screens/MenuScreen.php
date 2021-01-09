@@ -87,7 +87,8 @@ class MenuScreen
         $screen->form->columns[1]->fields[0]->field_value = $screen->form->source['menu']->links;
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->route('adfm.menus.update')->submit(),
-            Button::make('Удалить')->icon('trash')->route('adfm.menus.destroy')->canSee($screen->form->isModelExists)
+            Button::make('Удалить')->icon('trash')->route('adfm.menus.destroy')->canSee($screen->form->isModelExists),
+            Link::make('Добавить пункт')->route('adfm.menuitems.create', ['menu_id' => $screen->request->route('id')])
         ]);
         $screen->form->build();
         $screen->form->render();
