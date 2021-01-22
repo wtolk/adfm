@@ -113,26 +113,31 @@ class File extends Model
 
     public function getPath(): string
     {
-        if ($this->disk == 'yandex-cloud') {
-            if (empty(env('YANDEX_STORAGE_FOLDER'))) {
-                throw new ErrorException('Нужно задать папку для yandex storage вида site.ru в файле .env
+        if ($this->disk == 'yandex-cloud' && empty(env('YANDEX_STORAGE_FOLDER'))) {
+            throw new ErrorException('Нужно задать папку для yandex storage вида site.ru в файле .env
                 параметр - YANDEX_STORAGE_FOLDER или указать локальное хранилище', 500);
-            }
-            return isset($this->path) ? $this->path : env('YANDEX_STORAGE_FOLDER').'/user_files/'.date('Y/m/d', time());
-        } else {
-            return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
         }
+        return isset($this->path) ? $this->path.$this->name.'.'.$this->extension : 'user_files/'.date('Y/m/d', time()).$this->name.'.'.$this->extension;
+    }
 
+    public function getDirectory()
+    {
+        return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
     }
 
     public function getUrl()
     {
-        return Storage::disk($this->disk)->url($this->getPath().$this->name.'.'.$this->extension);
+        return Storage::disk($this->disk)->url($this->getDirectory().$this->filename);
     }
 
     public function getUrlAttribute()
     {
         return $this->getUrl();
+    }
+
+    public function getFilenameAttribute()
+    {
+        return $this->name.'.'.$this->extension;
     }
 
     public function extension(): string
@@ -174,6 +179,18 @@ class File extends Model
             ->first();
     }
 
+    /**
+     * Сохраняет фаил в указанное место без сохранения модели
+     *
+     * @param $path
+     */
+    public function putFile($path, $name = null)
+    {
+        $name = ($name != null) ? $name : $this->name().'.'.$this->extension();
+        $this->storage->putFileAs($path, $this->file, $name);
+    }
+
+
     public function upload()
     {
         $data = [
@@ -184,7 +201,7 @@ class File extends Model
             'original_name' => $this->file->getClientOriginalName(),
             'sort'          => isset($this->file->sort) ? $this->file->sort : 0,
             'size'          => $this->file->getSize(),
-            'path'          => Str::finish($this->getPath(), '/'),
+            'path'          => Str::finish($this->getDirectory(), '/'),
             'disk'          => $this->disk,
             'model_name'    => $this->model_name,
             'model_id'    => $this->model_id,
@@ -195,8 +212,7 @@ class File extends Model
         $this->fill($data);
         $attachment = $this->getMatchesHash();
         if ($attachment === null) {
-//            dd($this->file, $this->file->getClientOriginalName());
-            $this->storage->putFileAs($this->getPath(), $this->file, $this->name().'.'.$this->extension());
+            $this->putFile($this->getDirectory());
             return $this->save();
         }
 
@@ -220,28 +236,4 @@ class File extends Model
         return $attachment;
 
     }
-
-//    public function save(array $options = [])
-//    {
-//
-////        Dev::dd($data); die;
-//
-//        ; // Рекурсия ебаная, надо исправлять , делай отдельный метод блять
-////
-////        if (! $this->storage->has($this->engine->path())) {
-////            $this->storage->makeDirectory($this->engine->path());
-////        }
-////
-//
-////
-//
-//
-////        $this->storage->putFileAs($this->engine->path(), $this->file, $this->engine->fullName(), [
-////            'mime_type' => $this->engine->mime(),
-////        ]);
-//
-//
-////        return $attachment;
-//    }
-
 }
