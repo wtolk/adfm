@@ -11,14 +11,13 @@ class PageController extends Controller
 
     public function showMainPage()
     {
-        $page = Page::find(1);
-        return view('adfm::public.layout', compact('page'));
+        return view('adfm::public.index');
     }
 
     public function showPage($slug)
     {
         $page = Page::where('slug', '=', $slug)->firstOrFail();
-        return view('adfm::public.layout', compact('page'));
+        return view('adfm::public.page', compact('page'));
     }
 
 }
