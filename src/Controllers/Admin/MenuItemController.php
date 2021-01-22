@@ -20,6 +20,11 @@ class MenuItemController extends Controller
         MenuItemScreen::create();
     }
 
+    public function createFromModel()
+    {
+        MenuItemScreen::createFromModel();
+    }
+
     /**
      * Создание
      */
