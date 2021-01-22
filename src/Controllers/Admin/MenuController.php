@@ -45,10 +45,10 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         $item = Menu::findOrFail($id);
-        if ($request->exists('links')) {
-            MenuItem::syncHierarchy($request->all()['links']);
+        if ($request->filled('menu.links')) {
+            MenuItem::syncHierarchy($request->menu['links']);
         }
-        $item->fill($request->all()['menu'])->save();
+        $item->fill($request->menu)->save();
         return redirect()->route('adfm.menus.index');
     }
 
