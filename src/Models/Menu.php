@@ -1,6 +1,7 @@
 <?php
 namespace App\Adfm\Models;
 
+use App\Adfm\Helpers\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,6 +45,21 @@ class Menu extends Model
 
     public function links()
     {
-        return $this->hasMany('Wtolk\Adfm\Models\MenuItem', 'menu_id', 'id')->where('parent_id', 0)->with('children');
+        return $this->hasMany('App\Adfm\Models\MenuItem', 'menu_id', 'id')->where('parent_id', 0)->with('children')->orderBy('position');
+    }
+
+    public static function getData($slug)
+    {
+        $uri = request()->getPathInfo();
+        $menu = Menu::where('slug', $slug)->first();
+        $links = MenuItem::where('menu_id', $menu->id)->orderBy('position')->get();
+        $tree = [];
+        foreach ($links as $link) {
+            if ($uri == '/'.$link['link']) {
+                $link['status'] = 'active';
+            }
+            $tree[$link['parent_id']][] = $link;
+        }
+        return $tree;
     }
 }
