@@ -85,7 +85,7 @@ class AdfmServiceProvider extends ServiceProvider
 
             ]);
 
-            return new Filesystem(new AwsS3Adapter($client, env('YANDEX_STORAGE_BUCKET')));
+            return new Filesystem(new AwsS3Adapter($client, env('YANDEX_STORAGE_BUCKET'), env('YANDEX_STORAGE_FOLDER')));
         });
         config(['filesystems.disks.yandex-cloud' => [
             'driver' => 'yandexcloud',
