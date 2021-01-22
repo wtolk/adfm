@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\Adfm\Helpers\AttachmentTrait;
+use App\Adfm\Helpers\Interfaces\ILinkMenu;
+use App\Adfm\Helpers\MenuLinkable;
 use App\Adfm\Helpers\Sluggable;
 
 /**
@@ -46,12 +48,12 @@ use App\Adfm\Helpers\Sluggable;
  * @method static \Illuminate\Database\Query\Builder|Page withoutTrashed()
  * @mixin \Eloquent
  */
-class Page extends Model
+class Page extends Model implements ILinkMenu
 {
     use HasFactory;
     use SoftDeletes;
     use Sluggable;
-//    use MenuLinkable;
+    use MenuLinkable;
     use AttachmentTrait;
 
     /*Преобразовываем json атрибут к обычному массиву */
@@ -79,47 +81,21 @@ class Page extends Model
         return $this->morphMany(File::class, 'model_relation', 'model_name', 'model_id')
             ->where('model_relation', '=', 'files')->orderBy('sort');
     }
-//
-//    public function link()
-//    {
-//        return $this->hasOne('\ADFM\Model\Link', 'link', 'alias');
-//    }
-//
-//    public function tax_categories()
-//    {
-//        return $this->belongsToMany(Tax_Category::class, 'pages_tax_category', 'page_id', 'tax_category_id', 'id');
-//    }
-//
-//    public function tax_post_tags()
-//    {
-//        return $this->belongsToMany(Tax_Post_Tag::class, 'pages_tax_post_tag', 'page_id', 'tax_post_tag_id', 'id');
-//    }
-//
-//    public function setSettingsAttribute($value)
-//    {
-//        if (isset($value['developer-mode'] ) && $value['developer-mode'] != '0') {
-//            $value['developer-mode'] = 'on';
-//        } else {
-//            $value['developer-mode'] = 'off';
-//        }
-//        $this->attributes['settings'] = json_encode($value);
-//    }
-//
 
-//
-//    /**
-//     * @return string ссылка для меню
-//     */
-//    public function getLinkPath() {
-//        return $this->alias;
-//    }
-//
-//    /**
-//     * @return string Название ссылки для меню
-//     */
-//    public function getLinkTitle() {
-//        return $this->title;
-//    }
+
+    /**
+     * @return string ссылка для меню
+     */
+    public function getLinkPath() {
+        return $this->slug;
+    }
+
+    /**
+     * @return string Название ссылки для меню
+     */
+    public function getLinkTitle() {
+        return $this->title;
+    }
 //
 //    public function breadcrumbs()
 //    {

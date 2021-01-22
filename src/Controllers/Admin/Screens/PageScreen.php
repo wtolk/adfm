@@ -88,7 +88,13 @@ class PageScreen
         $screen->form->columns = self::getFields();
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->route('adfm.pages.update')->submit(),
-            Button::make('Удалить')->icon('trash')->route('adfm.pages.destroy')->canSee($screen->form->isModelExists)
+            Button::make('Удалить')->icon('trash')->route('adfm.pages.destroy')->canSee($screen->form->isModelExists),
+            Link::make('Добавить в меню')->icon('trash')
+                ->route('adfm.menuitems.createFromModel', [
+                    'model_name' => 'Page',
+                    'model_id' => $screen->request->route('id'),
+                    'menu_id' => '0',
+                ])->canSee($screen->form->isModelExists)
         ]);
         $screen->form->build();
         $screen->form->render();

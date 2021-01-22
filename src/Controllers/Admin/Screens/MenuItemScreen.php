@@ -3,6 +3,7 @@
 namespace App\Adfm\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
+use Whoops\Exception\ErrorException;
 use Wtolk\Crud\Form\Column;
 use Wtolk\Crud\Form\Cropper;
 use Wtolk\Crud\Form\File;
@@ -70,7 +71,24 @@ class MenuItemScreen
         $screen->form->columns = self::getFields();
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->route('adfm.menuitems.update')->submit(),
-            Button::make('Удалить')->icon('trash')->route('adfm.menuitems.destroy')->canSee($screen->form->isModelExists)
+        ]);
+        $screen->form->build();
+        $screen->form->render();
+    }
+
+    public static function createFromModel()
+    {
+        $screen = new self();
+        $screen->form->isModelExists = false;
+        $screen->form->template('form-edit')->source([
+            'menuitem' => new MenuItem()
+        ]);
+        $screen->form->title = 'Создание menuitem';
+        $screen->form->route = route('adfm.menuitems.store');
+        $screen->form->columns = self::getFields();
+        $screen->setMenuLinkFromModelSource();
+        $screen->form->buttons([
+            Button::make('Сохранить')->icon('save')->route('adfm.menuitems.update')->submit(),
         ]);
         $screen->form->build();
         $screen->form->render();
@@ -83,9 +101,6 @@ class MenuItemScreen
         $screen->form->template('form-edit')->source([
             'menuitem' => MenuItem::findOrFail($screen->request->route('id'))
         ]);
-        $item = MenuItem::findOrFail($screen->request->route('id'));
-
-
 
         $screen->form->title = 'Редактирование menuitem';
         $screen->form->route = route('adfm.menuitems.update', $screen->form->source['menuitem']->id);
@@ -108,16 +123,47 @@ class MenuItemScreen
                 Input::make('menuitem.link')
                     ->title('Ссылка')
                     ->placeholder('http://google.ru'),
-                Select::make('menuitem.select')->options([
-                    '1' => 'Быть',
-                    '0' => 'Не быть'
-                    ]
-                )->title('Вопрос')->empty('Нет выбора'),
                 Relation::make('menuitem.menu')->title('Выберите меню')
                     ->options( Menu::all()->pluck('title', 'id')->toArray())->defaultValue((int) request()->route('menu_id')),
-                Cropper::make('menuitem.image')->title('Изображение')
+                Cropper::make('menuitem.image')->title('Изображение')->cropSize(350, 250)
             ])
         ];
+    }
+
+    /**
+     * Берет поля которые обьявлены, и заполняет их данными из модели.
+     *
+     * @throws ErrorException
+     */
+    public function setMenuLinkFromModelSource()
+    {
+        $cols = $this->form->columns;
+
+        $model = '\App\Adfm\Models\\'.$this->request->route('model_name');
+        // Проверяем интерфейс модели
+        $object = new $model();
+        $interfaces = class_implements($object);
+        if (!in_array("App\Adfm\Helpers\Interfaces\ILinkMenu", $interfaces)) {
+            throw new ErrorException('Модель должна наследовать интерфейс ILinkMenu, что бы ее добавлять в меню', 500);
+        }
+        // Проверяем есть ли такая запись
+        $object = $model::find($this->request->route('model_id'));
+        if (is_null($object)) {
+            throw new ErrorException(
+                'У модели '.$this->request->route('model_name').'
+                не найдена запись с id='.$this->request->route('model_id'), 500);
+        }
+
+        if ($cols[0]->fields[0]->field_name == 'menuitem[title]' && $cols[0]->fields[2]->field_name == 'menuitem[link]') {
+            $cols[0]->fields[0]->defaultValue($object->getLinkTitle());
+            $cols[0]->fields[2]->defaultValue($object->getLinkPath());
+        } else {
+            throw new ErrorException('В методе MenuItemScreen->setMenuLinkFromModelSource() не верно указаны поля (title, link) для заполнения данными из моделей', 500);
+        }
+
+        $cols[0]->fields[] = Input::make('menuitem.model_name')->defaultValue($model)->setType('hidden');
+        $cols[0]->fields[] = Input::make('menuitem.model_id')->defaultValue($object->id)->setType('hidden');
+
     }
 
 }
