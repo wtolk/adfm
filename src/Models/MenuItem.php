@@ -60,6 +60,8 @@ class MenuItem extends Model
         'link',
         'parent_id',
         'menu_id',
+        'model_name',
+        'model_id',
         'position',
         'select'
     ];
@@ -80,7 +82,7 @@ class MenuItem extends Model
 
     public function children_recursive()
     {
-        return $this->hasMany('Wtolk\Adfm\Models\MenuItem', 'parent_id');
+        return $this->hasMany('App\Adfm\Models\MenuItem', 'parent_id');
     }
 
     public function children()
