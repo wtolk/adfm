@@ -2,9 +2,11 @@
 
 namespace Wtolk\Adfm\Providers;
 
+use App\Adfm\Helpers\ImageCache;
 use App\Helpers\Dev;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
@@ -131,10 +133,11 @@ class AdfmServiceProvider extends ServiceProvider
      */
     protected function setViewHelpers()
     {
-        Blade::directive('render_tree', function ($expression) {
-            return $expression;
+        Blade::if('FrontPage', function () {
+            return Request::is('/');
         });
         \View::share('php_tags', '<?php');
+        class_alias(ImageCache::class, 'ImageCache');
     }
 
     /**
