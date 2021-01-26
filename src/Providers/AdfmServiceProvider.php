@@ -4,6 +4,7 @@ namespace Wtolk\Adfm\Providers;
 
 use App\Adfm\Helpers\ImageCache;
 use App\Helpers\Dev;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
@@ -137,7 +138,10 @@ class AdfmServiceProvider extends ServiceProvider
             return Request::is('/');
         });
         \View::share('php_tags', '<?php');
-        class_alias(ImageCache::class, 'ImageCache');
+
+        if (!App::runningInConsole()) {
+            class_alias(ImageCache::class, 'ImageCache');
+        }
     }
 
     /**
