@@ -8,6 +8,7 @@ use App\Helpers\Dev;
 use Whoops\Exception\ErrorException;
 use Wtolk\Crud\Form\Checkbox;
 use Wtolk\Crud\Form\Column;
+use Wtolk\Crud\Form\DateTime;
 use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\MultiFile;
@@ -36,7 +37,7 @@ class PageScreen
         $screen->form->template('table-list')->source([
             'pages' => Page::paginate(50)
         ]);
-
+        $screen->form->title = 'Страницы';
         $screen->form->addField(
             TableField::make('title', 'Название страницы')
                 ->link(function ($model) {
@@ -46,9 +47,15 @@ class PageScreen
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(
-            TableField::make('ololo', 'Удалить страницу')
+            TableField::make('', '')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.pages.destroy', ['id' => $model->id])->render();
+                })
+        );
+        $screen->form->addField(
+            TableField::make('', '')
+                ->link(function ($model) {
+                    echo Link::make('Просмотр')->route('adfm.show.page', ['slug' => $model->slug])->render();
                 })
         );
         $screen->form->buttons([
@@ -70,7 +77,6 @@ class PageScreen
         $screen->form->columns = self::getFields();
         $screen->form->buttons([
             Button::make('Сохранить')->icon('save')->route('adfm.pages.update')->submit(),
-            Button::make('Удалить')->icon('trash')->route('adfm.pages.destroy')->canSee($screen->form->isModelExists)
         ]);
         $screen->form->build();
         $screen->form->render();
@@ -125,6 +131,8 @@ class PageScreen
 
                 Input::make('page.meta.description')
                     ->title('Description (мета-тег)'),
+
+                DateTime::make('time')->title('Time')
             ])->class('col col-md-4')
         ];
     }
