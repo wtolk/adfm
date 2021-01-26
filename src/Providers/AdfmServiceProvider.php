@@ -13,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Wtolk\Adfm\Commands\CheckDBCommand;
 use Wtolk\Adfm\Commands\CreateDBCommand;
+use Wtolk\Adfm\Commands\CreateUserCommand;
 use Wtolk\Adfm\Commands\InstallSetUpCommand;
 use Wtolk\Adfm\Commands\SetEnvCommand;
 use App\Actions\Fortify\CreateNewUser;
@@ -155,6 +156,7 @@ class AdfmServiceProvider extends ServiceProvider
                 SetEnvCommand::class,
                 CreateDBCommand::class,
                 InstallSetUpCommand::class,
+                CreateUserCommand::class
             ]);
         }
     }
