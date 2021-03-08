@@ -34,6 +34,7 @@ class MenuScreen
         $screen->form->template('table-list')->source([
             'menus' => Menu::paginate(50)
         ]);
+        $screen->form->title = 'Меню сайта';
 
         $screen->form->addField(
             TableField::make('title', 'Название')
