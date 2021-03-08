@@ -2,6 +2,7 @@
 
 namespace Wtolk\Adfm\Providers;
 
+use App\Adfm\Helpers\FeedbackViewComponent;
 use App\Adfm\Helpers\ImageCache;
 use App\Helpers\Dev;
 use Illuminate\Support\Facades\App;
@@ -143,6 +144,8 @@ class AdfmServiceProvider extends ServiceProvider
         if (!App::runningInConsole()) {
             class_alias(ImageCache::class, 'ImageCache');
         }
+
+        Blade::component('feedback-form', FeedbackViewComponent::class);
     }
 
     /**
