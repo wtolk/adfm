@@ -85,16 +85,16 @@ class File extends Model
         'path',
         'sort',
         'disk',
-        'model_name',
-        'model_id',
+        'fileable_type',
+        'fileable_id',
         'model_relation',
         'group',
         'user_id',
     ];
 
     public $model_relation = null;
-    public $model_id = null;
-    public $model_name = null;
+    public $fileable_id = null;
+    public $fileable_type = null;
 
     public static function make(UploadedFile $file)
     {
@@ -203,8 +203,8 @@ class File extends Model
             'size'          => $this->file->getSize(),
             'path'          => Str::finish($this->getDirectory(), '/'),
             'disk'          => $this->disk,
-            'model_name'    => $this->model_name,
-            'model_id'    => $this->model_id,
+            'fileable_type'    => $this->fileable_type,
+            'fileable_id'    => $this->fileable_id,
             'model_relation'    => $this->model_relation,
             'group'         => $this->group,
             'user_id'       => Auth::id(),
@@ -221,8 +221,8 @@ class File extends Model
             'sort'          => 0,
             'user_id'       => Auth::id(),
             'group'         => $this->group,
-            'model_name'    => $this->model_name,
-            'model_id'    => $this->model_id,
+            'fileable_type'    => $this->fileable_type,
+            'fileable_id'    => $this->fileable_id,
             'model_relation'    => $this->model_relation
         ]);
         $attachment->file = $this->file;

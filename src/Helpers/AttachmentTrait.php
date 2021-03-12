@@ -8,11 +8,12 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Adfm\Models\File;
 use Symfony\Component\HttpFoundation\File\File as RawFile;
+use Wtolk\Eloquent\Filter;
 
 trait AttachmentTrait
 {
     use Notifiable;
-
+    use Filter;
     public $filesNeedUploadedAfterSaving = [];
     public $filesNeedDeletedAfterSaving = [];
 
@@ -20,6 +21,13 @@ trait AttachmentTrait
     {
         if ($attributes) {
             foreach ($attributes as $key => $attribute) {
+//                if ($key == 'categories') {
+//
+////                    dd($this->isRelation($key, $attribute));
+//
+//                    \App\Adfm\Helpers\Dev::dd($this->$key(), $attribute);
+//                }
+
                 if ($this->isRelation($key, $attribute)) {
                     $this->updateRelationsField($key, $attribute);
                 }
@@ -108,8 +116,8 @@ trait AttachmentTrait
         static::saved(function ($model) {
             foreach ($model->filesNeedUploadedAfterSaving as $uploadedFile) {
                 $f = File::make($uploadedFile['file']);
-                $f->model_name = get_class($model);
-                $f->model_id = $model->id;
+                $f->fileable_type = get_class($model);
+                $f->fileable_id = $model->id;
                 $f->model_relation = $uploadedFile['model_relation'];
                 $f->upload();
             }
@@ -153,10 +161,23 @@ trait AttachmentTrait
         }
     }
 
+    /**
+     * универсальный метод для обновления отношений разных типов
+     *
+     * @param $key - поле
+     * @param $attribute - значение поля
+     */
     protected function updateRelationsField($key, $attribute)
     {
+        // для обновления MenuItem
         if (is_a($this->$key(), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
             $this->{$this->$key()->getForeignKeyName()} = $attribute;
+        }
+
+        // для обновления многие ко многим
+        if (is_a($this->$key(), 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
+            $value = is_array($attribute) ? $attribute : [$attribute];
+            $this->$key()->sync($value);
         }
     }
 
