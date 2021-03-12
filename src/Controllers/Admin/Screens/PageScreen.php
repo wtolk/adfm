@@ -35,7 +35,7 @@ class PageScreen
     {
         $screen = new self();
         $screen->form->template('table-list')->source([
-            'pages' => Page::paginate(50)
+            'pages' => Page::withTrashed()->filter(request()->input('filter'))->paginate(50)
         ]);
         $screen->form->title = 'Страницы';
         $screen->form->addField(
@@ -58,6 +58,8 @@ class PageScreen
                     echo Link::make('Просмотр')->route('adfm.show.page', ['slug' => $model->slug])->render();
                 })
         );
+        $screen->form->filters(self::getFilters());
+
         $screen->form->buttons([
             Link::make('Добавить')->class('button')->icon('note')->route('adfm.pages.create')
         ]);
@@ -106,17 +108,30 @@ class PageScreen
         $screen->form->render();
     }
 
+    public static function getFilters() {
+        return [
+            Input::make('filter.title:like')->title('Заголовок страницы')->setFilter(),
+            Input::make('filter.content:like')->title('Текст страницы')->setFilter(),
+        ];
+    }
+
     public static function getFields() {
+        $page = Page::findOrFail(request()->route('id'));
+        $dev_mode = false;
+        if (isset($page) && $page->options['editor_dev_mode'] == 1) {
+            $dev_mode = true;
+        }
+
         return [
             Column::make([
                 Input::make('page.title')
                     ->title('Заголовок страницы')
                     ->required()
                     ->placeholder('Например , контакты организации.'),
+                Checkbox::make('page.options.editor_dev_mode')->title('Режим разработчика'),
+                Summernote::make('page.content')->title('Содержимое')->devMode($dev_mode),
 
-                Summernote::make('page.content')->title('Содержимое'),
-
-                File::make('page.image')->title('Изображение') ,
+//                File::make('page.image')->title('Изображение') ,
 
                 MultiFile::make('page.files')->title('Прикрепленные документы')
             ]),
@@ -127,15 +142,13 @@ class PageScreen
                 Input::make('page.meta.title')
                     ->title('TITLE (мета-тег)'),
 
-                Checkbox::make('page.meta.checkbox')->title('Чекбокс'),
+//                Checkbox::make('page.meta.checkbox')->title('Чекбокс'),
 
                 Input::make('page.meta.description')
                     ->title('Description (мета-тег)'),
 
-                DateTime::make('time')->title('Time')
+//                DateTime::make('time')->title('Time')
             ])->class('col col-md-4')
         ];
     }
-
-
 }
