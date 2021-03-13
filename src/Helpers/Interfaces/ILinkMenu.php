@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Helpers\Interfaces;
+namespace Wtolk\Adfm\Helpers\Interfaces;
 
 interface ILinkMenu
 {

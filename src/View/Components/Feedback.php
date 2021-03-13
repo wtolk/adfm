@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Adfm\Helpers;
+namespace App\View\Adfm\Components;
 
 use Illuminate\View\Component;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\TextArea;
 
-class FeedbackViewComponent extends Component
+class Feedback extends Component
 {
     public $fields = [];
     public $id;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Helpers;
+namespace App\Helpers\Adfm;
 
 class Dev
 {

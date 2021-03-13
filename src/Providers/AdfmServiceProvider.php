@@ -2,8 +2,6 @@
 
 namespace Wtolk\Adfm\Providers;
 
-use App\Adfm\Helpers\FeedbackViewComponent;
-use App\Adfm\Helpers\ImageCache;
 use App\Helpers\Dev;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -50,23 +48,24 @@ class AdfmServiceProvider extends ServiceProvider
         $this->setViewHelpers();
 
         $this->publishes([
-            __DIR__.'/../Controllers' => app_path('Adfm/Controllers'),
-            __DIR__.'/../Models' => app_path('Adfm/Models'),
-            __DIR__.'/../views' => app_path('Adfm/views'),
-            __DIR__.'/../Helpers' => app_path('Adfm/Helpers'),
-            __DIR__.'/../routes' => app_path('Adfm/routes'),
+            __DIR__.'/../Controllers' => app_path('Http/Controllers'),
+            __DIR__.'/../Models' => app_path('Models'),
+            __DIR__.'/../views' => resource_path('views/adfm'),
+            __DIR__.'/../Helpers' => app_path('Helpers/Adfm'),
+            __DIR__.'/../routes' => base_path('/routes/adfm'),
+            __DIR__.'/../View' => app_path('View/Adfm'),
             __DIR__.'/../database/migrations' => app_path('../database/migrations'),
         ]);
 
-        if (file_exists(app_path('Adfm/routes') . '/admin-routes.php')) {
-            $this->loadRoutesFrom(app_path('Adfm/routes') . '/admin-routes.php');
-            $this->loadRoutesFrom(app_path('Adfm/routes') . '/public-routes.php');
+        if (file_exists(base_path('/routes/adfm') . '/admin-routes.php')) {
+            $this->loadRoutesFrom(base_path('/routes/adfm') . '/admin-routes.php');
+            $this->loadRoutesFrom(base_path('/routes/adfm') . '/public-routes.php');
         } else {
             $this->loadRoutesFrom(__DIR__.'/../routes' . '/admin-routes.php');
             $this->loadRoutesFrom(__DIR__.'/../routes' . '/public-routes.php');
         }
 
-        $this->loadViewsFrom(app_path('Adfm/views'), 'adfm');
+        $this->loadViewsFrom(resource_path('views/adfm'), 'adfm');
 
         $this->registerFortifySettings();
         $this->setSuperAdminRole();
@@ -144,8 +143,6 @@ class AdfmServiceProvider extends ServiceProvider
         if (!App::runningInConsole()) {
             class_alias(ImageCache::class, 'ImageCache');
         }
-
-        Blade::component('feedback-form', FeedbackViewComponent::class);
     }
 
     /**

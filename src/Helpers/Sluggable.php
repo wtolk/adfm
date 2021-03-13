@@ -1,5 +1,5 @@
 <?php
-namespace App\Adfm\Helpers;
+namespace App\Helpers\Adfm;
 
 use Illuminate\Support\Str;
 

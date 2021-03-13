@@ -1,5 +1,5 @@
 <?php
-namespace App\Adfm\Models;
+namespace App\Models\Adfm;
 
 use App\Adfm\Helpers\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Controllers\Site;
+namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

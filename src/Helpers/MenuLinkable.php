@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Adfm\Helpers;
+namespace App\Helpers\Adfm;
 use App\Adfm\Models\MenuItem;
 
 trait MenuLinkable

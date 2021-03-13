@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Adfm\Models;
+namespace App\Models\Adfm;
 
 
 use App\Helpers\Dev;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Adfm\Models;
+namespace App\Models\Adfm;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Adfm\Helpers\AttachmentTrait;

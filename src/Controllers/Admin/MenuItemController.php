@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Adfm\Controllers\Admin\Screens\MenuItemScreen;
