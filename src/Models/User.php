@@ -4,8 +4,7 @@ namespace App\Models\Adfm;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Adfm\Helpers\AttachmentTrait;
-use App\Adfm\Helpers\Sluggable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -14,6 +13,7 @@ class User extends Authenticatable
 {
     use HasFactory;
     use HasRoles;
+    use Notifiable;
 
     protected $fillable = [
         'name',
