@@ -89,7 +89,7 @@ class PageScreen
         $screen = new self();
         $screen->form->isModelExists = true;
         $screen->form->template('form-edit')->source([
-                'page' => Page::findOrFail($screen->request->route('id'))
+                'page' => Page::find($screen->request->route('id'))
         ]);
         $screen->form->title = 'Редактирование страницы';
         $screen->form->route = route('adfm.pages.update', $screen->form->source['page']->id);
@@ -116,7 +116,7 @@ class PageScreen
     }
 
     public static function getFields() {
-        $page = Page::findOrFail(request()->route('id'));
+        $page = Page::find(request()->route('id'));
         $dev_mode = false;
         if (isset($page) && $page->options['editor_dev_mode'] == 1) {
             $dev_mode = true;
