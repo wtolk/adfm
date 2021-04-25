@@ -2,10 +2,13 @@
 
 namespace Wtolk\Adfm\Providers;
 
+use App\Helpers\Adfm\ImageCache;
 use App\Helpers\Dev;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
@@ -101,6 +104,11 @@ class AdfmServiceProvider extends ServiceProvider
      */
     protected function registerFortifySettings()
     {
+
+        RateLimiter::for("login", function () {
+            Limit::perMinute(15);
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
