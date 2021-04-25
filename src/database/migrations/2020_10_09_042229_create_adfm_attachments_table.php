@@ -26,8 +26,8 @@ class CreateAdfmAttachmentsTable extends Migration
             $table->text('alt')->nullable();
             $table->text('hash')->nullable();
             $table->string('disk')->default('public');
-            $table->string('model_name')->nullable();
-            $table->integer('model_id')->nullable();
+            $table->string('fileable_type')->nullable();
+            $table->integer('fileable_id')->nullable();
             $table->string('model_relation')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('group')->nullable();
