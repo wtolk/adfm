@@ -1,11 +1,11 @@
 <?php
 namespace App\Models\Adfm;
 
-use App\Adfm\Helpers\Dev;
+use App\Helpers\Adfm\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Adfm\Helpers\Sluggable;
+use App\Models\Adfm\Traits\Sluggable;
 
 /**
  * Wtolk\Adfm\Models\Menu

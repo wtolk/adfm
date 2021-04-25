@@ -1,8 +1,8 @@
 <?php
 
 
-namespace App\Helpers\Adfm;
-use App\Adfm\Models\MenuItem;
+namespace App\Models\Adfm\Traits;
+use App\Models\Adfm\MenuItem;
 
 trait MenuLinkable
 {

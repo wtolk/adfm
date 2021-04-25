@@ -4,15 +4,15 @@
 namespace App\Models\Adfm;
 
 
-use App\Helpers\Dev;
+use App\Helpers\Adfm\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-use App\Adfm\Helpers\AttachmentTrait;
-use App\Adfm\Helpers\Interfaces\ILinkMenu;
-use App\Adfm\Helpers\MenuLinkable;
-use App\Adfm\Helpers\Sluggable;
+use App\Models\Adfm\Traits\AttachmentTrait;
+use App\Models\Adfm\ILinkMenu;
+use App\Models\Adfm\Traits\MenuLinkable;
+use App\Models\Adfm\Traits\Sluggable;
 
 /**
  * Wtolk\Adfm\Models\Page
@@ -72,13 +72,13 @@ class Page extends Model implements ILinkMenu
 
     public function image()
     {
-        return $this->morphOne(File::class, 'model_relation', 'model_name', 'model_id')
+        return $this->morphOne(File::class, 'fileable')
             ->where('model_relation', '=', 'image');
     }
 
     public function files()
     {
-        return $this->morphMany(File::class, 'model_relation', 'model_name', 'model_id')
+        return $this->morphMany(File::class, 'fileable')
             ->where('model_relation', '=', 'files')->orderBy('sort');
     }
 

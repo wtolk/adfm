@@ -49,7 +49,7 @@ class AdfmServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../Controllers' => app_path('Http/Controllers'),
-            __DIR__.'/../Models' => app_path('Models'),
+            __DIR__.'/../Models' => app_path('Models/Adfm'),
             __DIR__.'/../views' => resource_path('views/adfm'),
             __DIR__.'/../Helpers' => app_path('Helpers/Adfm'),
             __DIR__.'/../routes' => base_path('/routes/adfm'),

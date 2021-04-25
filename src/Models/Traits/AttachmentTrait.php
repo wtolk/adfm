@@ -1,12 +1,12 @@
 <?php
-namespace App\Helpers\Adfm;
+namespace App\Models\Adfm\Traits;
 
 use App\Helpers\Dev;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use App\Adfm\Models\File;
+use App\Models\Adfm\File;
 use Symfony\Component\HttpFoundation\File\File as RawFile;
 use Wtolk\Eloquent\Filter;
 
@@ -116,8 +116,8 @@ trait AttachmentTrait
         static::saved(function ($model) {
             foreach ($model->filesNeedUploadedAfterSaving as $uploadedFile) {
                 $f = File::make($uploadedFile['file']);
-                $f->fileable_type = get_class($model);
-                $f->fileable_id = $model->id;
+                $f->model_name = get_class($model);
+                $f->model_id = $model->id;
                 $f->model_relation = $uploadedFile['model_relation'];
                 $f->upload();
             }

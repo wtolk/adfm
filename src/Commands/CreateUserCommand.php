@@ -2,7 +2,7 @@
 
 namespace Wtolk\Adfm\Commands;
 
-use App\Models\User;
+use App\Models\Adfm\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Wtolk\Crud\Generator;

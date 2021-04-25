@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use App\Adfm\Helpers\AttachmentTrait;
+use App\Models\Adfm\Traits\AttachmentTrait;
+use Illuminate\Support\Facades\URL;
 
 /**
  * Wtolk\Adfm\Models\MenuItem
@@ -92,12 +93,23 @@ class MenuItem extends Model
 
     public function image()
     {
-        return $this->morphOne(File::class, 'model_relation', 'model_name', 'model_id')
-            ->where('model_relation', '=', 'image');
+        return $this->morphOne(File::class, 'fileable')->where('model_relation', '=', 'image');
     }
 
     public function menu()
     {
         return $this->belongsTo(Menu::class);
+    }
+
+    public function getLinkAttribute($value)
+    {
+        if (substr($value, 0, 4) == 'http') {
+            return $value;
+        } else {
+            $url = new URL();
+            $r = $url->getFacadeRoot()->getRequest();
+            if (substr($value, 0, 1) != '/' ) { $value = '/'.$value; }
+            return $r->getScheme().'://'.$r->getHost().$value;
+        }
     }
 }

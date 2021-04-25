@@ -1,5 +1,5 @@
 <?php
-namespace App\Helpers\Adfm;
+namespace App\Models\Adfm\Traits;
 
 use Illuminate\Support\Str;
 
