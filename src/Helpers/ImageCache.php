@@ -1,41 +1,47 @@
 <?php
 
 
-namespace App\Adfm\Helpers;
+namespace App\Helpers\Adfm;
 
-
-use App\Adfm\Models\File;
-use Illuminate\Http\UploadedFile;
+use League\Glide\Responses\LaravelResponseFactory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use League\Glide\Responses\SymfonyResponseFactory;
 
 class ImageCache
 {
-    public $preset;
-    public $preset_name;
-    public $image_manager;
-    public $img_file;
-    public $img_cache_path;
-    public $alt;
     public $title;
+    public $alt;
+    public $class_name;
+    public $id;
+    public $url;
 
-    public function __toString()
-    {
-        return $this->img();
-    }
-    public static function get($file, $preset) {
-        $image_cache = new self();
-        $image_cache->preset_name = $preset;
-        $image_cache->img_file = $file;
-        $presets = config('imagecache.presets');
-        if (!isset($presets[$preset])) {
-            throw new \Exception('Нет такого стиля для изображения в конфиге imagecache.presets');
-        } else {
-            $image_cache->preset = $presets[$preset];
+    public static function get($file, $params) {
+        $imageCache = new self();
+
+        $server = \League\Glide\ServerFactory::create([
+            'response' => new LaravelResponseFactory(app('request')),
+            'source' => new \League\Flysystem\Filesystem(
+                Storage::disk($file->disk)->getDriver()->getAdapter()
+            ),
+            'cache' => new \League\Flysystem\Filesystem(
+                Storage::disk($file->disk)->getDriver()->getAdapter()
+            ),
+            'cache_path_prefix' => 'image_cache'
+        ]);
+
+        $st = Storage::disk($file->disk);
+        $url = $st->url($server->getCachePath($file->getPath(), $params ));
+        if (!Cache::has($server->getCachePath($file->getPath(), $params ))) {
+            $server->makeImage($file->getPath(), $params );
+            Cache::forever($server->getCachePath($file->getPath(), $params), $url);
         }
-        $image_cache->image_manager  = new \Intervention\Image\ImageManagerStatic;
-        $image_cache->process();
-        return $image_cache;
+        $imageCache->url = $url;
+        return $imageCache;
+    }
+
+    public function __toString() {
+        return '<img class="'.$this->class_name.'" src="'. $this->url .'"  alt="'.$this->alt.'" title="'.$this->title.'"/>';
     }
 
     public function title($title)
@@ -48,72 +54,14 @@ class ImageCache
         $this->alt = $alt;
         return $this;
     }
-
-    public function img()
+    public function className($class)
     {
-        return $this->generateImageElement();
-    }
-    public function src()
-    {
-        return $this->img_cache_path;
-    }
-
-    public function cache()
-    {
-        $this->img_cache_path = Storage::disk($this->img_file->disk)->url($this->getPath().$this->img_file->filename);
-        Cache::forever($this->img_file->getPath(), Storage::disk($this->img_file->disk)->url($this->getPath().$this->img_file->filename));
-    }
-
-    public function process()
-    {
-        $path_file = $this->img_file->disk == 'local'
-            ? Storage::disk('local')->path($this->img_file->getPath())
-            : Storage::disk($this->img_file->disk)->url($this->img_file->getPath());
-
-        if (Cache::has($this->img_file->getPath())){
-            $this->img_cache_path = Cache::get($this->img_file->getPath());
-            return $this;
-        }
-
-        if (Storage::disk($this->img_file->disk)->exists($this->getPath().$this->img_file->filename)) {
-            $this->cache();
-            return $this;
-        }
-
-        $img = $this->image_manager->make($path_file);
-        $operation = $this->preset['method'];
-        $parametres = $this->preset['parametres'];
-        $img->$operation(...$parametres);
-
-        $this->save($img);
-        $this->cache();
+        $this->class_name = $class;
         return $this;
     }
-
-
-    protected function generateImageElement() {
-        return '<img src="'. $this->img_cache_path .'"  alt="'. $this->alt .'" title="'. $this->title .'"/>';
-    }
-
-    private function save($img)
+    public function id($id)
     {
-        $img->encode();
-        // Создаем временный фаил
-        $temp = tmpfile();
-        fwrite($temp, $img->getEncoded());
-        $t = new UploadedFile(stream_get_meta_data($temp)['uri'], $this->img_file->filename, $img->mime, null, TRUE);
-        // Загружаем без сохранения модели
-        $file = File::make($t);
-        $file->putFile($this->getPath(), $this->img_file->filename);
-    }
-
-    /**
-     * Путь для сохранения картинки
-     *
-     * @return string
-     */
-    private function getPath()
-    {
-        return 'user_files/imagecache/' .$this->preset_name . '/' . $this->img_file->getDirectory();
+        $this->id = $id;
+        return $this;
     }
 }

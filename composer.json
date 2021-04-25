@@ -29,6 +29,8 @@
         "ajthinking/archetype": "*",
         "jackiedo/dotenv-editor": "*",
         "laravel/fortify": "*",
+        "league/glide": "^1.7",
+        "league/glide-laravel": "^1.0",
         "ralouphie/mimey": "*",
         "spatie/laravel-permission": "*",
         "league/flysystem-aws-s3-v3": "*",
