@@ -25,6 +25,7 @@
         }
     },
     "require": {
+        "wtolk/crud": "*",
         "ajthinking/archetype": "*",
         "jackiedo/dotenv-editor": "*",
         "laravel/fortify": "*",
