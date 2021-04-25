@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Controllers\Admin\Screens;
+namespace App\Http\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
 use Spatie\Permission\Models\Permission;
@@ -9,7 +9,7 @@ use Wtolk\Crud\Form\Custom;
 use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\FormPresenter;
-use App\Adfm\Models\Role;
+use App\Models\Adfm\Role;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\Checkbox;
 use Wtolk\Crud\Form\TableField;

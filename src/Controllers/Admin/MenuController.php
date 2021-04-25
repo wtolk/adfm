@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Adfm\Controllers\Admin\Screens\MenuScreen;
+use App\Http\Controllers\Admin\Screens\MenuScreen;
 use Illuminate\Http\Request;
-use App\Adfm\Models\Menu;
-use App\Adfm\Models\MenuItem;
+use App\Models\Adfm\Menu;
+use App\Models\Adfm\MenuItem;
 
 class MenuController extends Controller
 {

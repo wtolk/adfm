@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Adfm\Controllers\Admin\Screens\RoleScreen;
+use App\Http\Controllers\Admin\Screens\RoleScreen;
 use Illuminate\Http\Request;
-use App\Adfm\Models\Role;
+use App\Models\Adfm\Role;
 
 class RoleController extends Controller
 {

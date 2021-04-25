@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Adfm\Controllers\Admin\Screens\UserScreen;
+use App\Http\Controllers\Admin\Screens\UserScreen;
 use Illuminate\Http\Request;
-use App\Adfm\Models\User;
+use App\Models\Adfm\User;
 
 class UserController extends Controller
 {

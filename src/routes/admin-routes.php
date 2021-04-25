@@ -1,6 +1,6 @@
 <?php
 
-Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Adfm\Controllers\Admin')->group(function () {
+Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Controllers\Admin')->group(function () {
 
 
         Route::get('/pages', 'PageController@index')->name('adfm.pages.index');

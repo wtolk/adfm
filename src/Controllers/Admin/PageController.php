@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Adfm\Controllers\Admin\Screens\PageScreen;
+use App\Http\Controllers\Admin\Screens\PageScreen;
 use Illuminate\Http\Request;
-use App\Adfm\Models\Page;
+use App\Models\Adfm\Page;
 
 class PageController extends Controller
 {

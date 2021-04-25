@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Adfm\Controllers\Admin\Screens;
+namespace App\Http\Controllers\Admin\Screens;
 
 
 use App\Helpers\Dev;
@@ -15,7 +15,7 @@ use Wtolk\Crud\Form\MultiFile;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\FormPresenter;
-use App\Adfm\Models\Page;
+use App\Models\Adfm\Page;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\Button;
 

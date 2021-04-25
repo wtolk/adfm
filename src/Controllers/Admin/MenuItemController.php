@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Adfm\Controllers\Admin\Screens\MenuItemScreen;
+use App\Http\Controllers\Admin\Screens\MenuItemScreen;
 use Illuminate\Http\Request;
-use App\Adfm\Models\MenuItem;
+use App\Models\Adfm\MenuItem;
 
 class MenuItemController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adfm\Controllers\Admin\Screens;
+namespace App\Http\Controllers\Admin\Screens;
 
 use App\Helpers\Dev;
 use Whoops\Exception\ErrorException;
@@ -11,8 +11,8 @@ use Wtolk\Crud\Form\Relation;
 use Wtolk\Crud\Form\Select;
 use Wtolk\Crud\Form\Summernote;
 use Wtolk\Crud\FormPresenter;
-use App\Adfm\Models\MenuItem;
-use App\Adfm\Models\Menu;
+use App\Models\Adfm\MenuItem;
+use App\Models\Adfm\Menu;
 use Wtolk\Crud\Form\Input;
 use Wtolk\Crud\Form\Checkbox;
 use Wtolk\Crud\Form\TableField;
