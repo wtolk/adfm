@@ -21,6 +21,8 @@ class CreateUserCommand extends Command
 
     public function handle()
     {
+        Role::firstOrCreate(['guard_name' => 'web'], ['name' => 'root']);
+
         if (User::where('email', '=', $this->argument('email') )->first() ) {
             $this->error('Пользователь с таким Email уже существует');
         } else {
