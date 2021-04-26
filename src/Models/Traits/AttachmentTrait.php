@@ -116,8 +116,8 @@ trait AttachmentTrait
         static::saved(function ($model) {
             foreach ($model->filesNeedUploadedAfterSaving as $uploadedFile) {
                 $f = File::make($uploadedFile['file']);
-                $f->model_name = get_class($model);
-                $f->model_id = $model->id;
+                $f->fileable_type = get_class($model);
+                $f->fileable_id = $model->id;
                 $f->model_relation = $uploadedFile['model_relation'];
                 $f->upload();
             }
