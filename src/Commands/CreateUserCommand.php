@@ -28,7 +28,7 @@ class CreateUserCommand extends Command
             $this->error('Пользователь с таким Email уже существует');
         } else {
             $user = User::create(['name' => $this->argument('name'), 'email' => $this->argument('email'),
-                'password' => \Hash::make($this->argument('password')) ]);
+                'password' => $this->argument('password') ]);
 
             $user->assignRole('root');
             $this->info('Пользователь создан');
