@@ -45,7 +45,7 @@ class Menu extends Model
 
     public function links()
     {
-        return $this->hasMany('App\Adfm\Models\MenuItem', 'menu_id', 'id')->where('parent_id', 0)->with('children')->orderBy('position');
+        return $this->hasMany('App\Models\Adfm\MenuItem', 'menu_id', 'id')->where('parent_id', 0)->with('children')->orderBy('position');
     }
 
     public static function getData($slug)

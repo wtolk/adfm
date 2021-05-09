@@ -83,7 +83,7 @@ class MenuItem extends Model
 
     public function children_recursive()
     {
-        return $this->hasMany('App\Adfm\Models\MenuItem', 'parent_id');
+        return $this->hasMany('App\Models\Adfm\MenuItem', 'parent_id');
     }
 
     public function children()
