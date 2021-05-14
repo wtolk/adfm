@@ -139,11 +139,11 @@ class MenuItemScreen
     {
         $cols = $this->form->columns;
 
-        $model = '\App\Adfm\Models\\'.$this->request->route('model_name');
+        $model = '\App\Models\Adfm\\'.$this->request->route('model_name');
         // Проверяем интерфейс модели
         $object = new $model();
         $interfaces = class_implements($object);
-        if (!in_array("App\Adfm\Helpers\Interfaces\ILinkMenu", $interfaces)) {
+        if (!in_array("App\Models\Adfm\ILinkMenu", $interfaces)) {
             throw new ErrorException('Модель должна наследовать интерфейс ILinkMenu, что бы ее добавлять в меню', 500);
         }
         // Проверяем есть ли такая запись
