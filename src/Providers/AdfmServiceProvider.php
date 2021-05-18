@@ -58,6 +58,8 @@ class AdfmServiceProvider extends ServiceProvider
             __DIR__.'/../routes' => base_path('/routes/adfm'),
             __DIR__.'/../View' => app_path('View/Adfm'),
             __DIR__.'/../database/migrations' => app_path('../database/migrations'),
+            __DIR__.'/../database/factories' => app_path('../database/factories'),
+            __DIR__.'/../tests' => base_path('/tests'),
         ]);
 
         if (file_exists(base_path('/routes/adfm') . '/admin-routes.php')) {
