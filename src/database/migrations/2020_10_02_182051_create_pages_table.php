@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('content')->default(null)->nullable();
+            $table->mediumText('content')->default(null)->nullable();
             $table->json('options')->default(null)->nullable();
             $table->json('meta')->default(null)->nullable();
             $table->boolean('is_published')->default(true);
