@@ -24,7 +24,7 @@ class MenuTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('adfm.menus.store'), $item);
 
-        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('menus', 1);
         $this->assertDatabaseHas('menus', $item['menu']);
     }
 
@@ -38,7 +38,7 @@ class MenuTest extends TestCase
 
         $response = $this->actingAs($user)->patch(route('adfm.menus.update', ['id' => $menu->id]), $item);
 
-        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('menus', 1);
         $this->assertDatabaseMissing('menus', $menu->toArray());
         $this->assertDatabaseHas('menus', $item['menu']);
     }
