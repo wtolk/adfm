@@ -52,6 +52,11 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::match(['put', 'patch'],'/users/{id}', 'UserController@update')->name('adfm.users.update');
         Route::delete('/users/{id}', 'UserController@destroy')->name('adfm.users.destroy');
 
+        /* Роуты для сообщений */
+
+        Route::get('/feedbacks', 'FeedbackController@index')->name('adfm.feedbacks.index');
+        Route::get('/users/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
+        Route::delete('/users/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
 
 });
 //Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');

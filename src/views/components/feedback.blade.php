@@ -19,13 +19,10 @@
             data['fields'][$(field).find('.form-control').attr('name')] = $(field).find('.form-control').val();
             // console.log($(field).find('.form-control').val(), $(field).find('.form-control'))
         });
-        console.log(data);
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "{{ route('adfm.feedbacks.store') }}",
             data: data
-        }).done(function( msg ) {
-            alert( "Data Saved: " + msg );
         });
     });
 
