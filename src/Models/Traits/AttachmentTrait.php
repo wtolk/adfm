@@ -28,7 +28,7 @@ trait AttachmentTrait
 //                    \App\Adfm\Helpers\Dev::dd($this->$key(), $attribute);
 //                }
 
-                if ($this->isRelation($key, $attribute)) {
+                if ($this->isRelation($key)) {
                     $this->updateRelationsField($key, $attribute);
                 }
 
@@ -152,13 +152,6 @@ trait AttachmentTrait
             }
         }
         return false;
-    }
-
-    protected function isRelation($key, $attribute)
-    {
-        if (method_exists($this, $key) && is_a($this->$key(), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-            return true;
-        }
     }
 
     /**
