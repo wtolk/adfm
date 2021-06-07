@@ -73,6 +73,8 @@ class AdfmServiceProvider extends ServiceProvider
         $this->registerFortifySettings();
         $this->setSuperAdminRole();
 
+        Blade::componentNamespace('App\\View\\Adfm\\Components', 'adfm');
+
     }
 
     /**

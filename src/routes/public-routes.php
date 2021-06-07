@@ -5,3 +5,4 @@ Route::group(['namespace' => 'App\Http\Controllers\Site', 'middleware' => ['web'
     Route::get('/{slug}', 'PageController@showPage')->name('adfm.show.page');
 });
 
+Route::post('message', 'App\Http\Controllers\Admin\FeedbackController@store')->name('adfm.feedbacks.store')->middleware('web');
