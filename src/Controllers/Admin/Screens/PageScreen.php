@@ -129,7 +129,7 @@ class PageScreen
                     ->required()
                     ->placeholder('Например , контакты организации.'),
                 Checkbox::make('page.options.editor_dev_mode')->title('Режим разработчика'),
-                Summernote::make('page.content')->title('Содержимое')->devMode($dev_mode),
+                Summernote::make('page.content')->title('Содержимое'),
 
 //                File::make('page.image')->title('Изображение') ,
 
