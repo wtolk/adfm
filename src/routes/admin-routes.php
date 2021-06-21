@@ -9,6 +9,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/pages/{id}/edit', 'PageController@edit')->name('adfm.pages.edit');
         Route::match(['put', 'patch'],'/pages/{id}', 'PageController@update')->name('adfm.pages.update');
         Route::delete('/pages/{id}', 'PageController@destroy')->name('adfm.pages.destroy');
+        Route::get('/pages/{id}', 'PageController@restore')->name('adfm.pages.restore');
 //Route::get('/pages/{id}/clone', 'PageController@clone');
 
 
