@@ -54,9 +54,14 @@ class PageScreen
         );
         $screen->form->addField(
             TableField::make('', '')
-                ->link(function ($model) {
+            ->link(function ($model) {
+                if(!$model->trashed()){
                     echo Link::make('Просмотр')->route('adfm.show.page', ['slug' => $model->slug])->render();
-                })
+                }
+                else{
+                    echo Link::make('Восстановить')->route('adfm.pages.restore', ['id' => $model->id])->render();
+                }
+            })
         );
         $screen->form->filters(self::getFilters());
 
@@ -89,7 +94,7 @@ class PageScreen
         $screen = new self();
         $screen->form->isModelExists = true;
         $screen->form->template('form-edit')->source([
-                'page' => Page::find($screen->request->route('id'))
+            'page' => Page::withTrashed()->find($screen->request->route('id'))
         ]);
         $screen->form->title = 'Редактирование страницы';
         $screen->form->route = route('adfm.pages.update', $screen->form->source['page']->id);

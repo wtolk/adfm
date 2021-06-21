@@ -43,7 +43,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Page::findOrFail($id);
+        $item = Page::withTrashed()->findOrFail($id);
         $item->fill($request->all()['page'])->save();
         return redirect()->route('adfm.pages.index');
     }
@@ -55,5 +55,15 @@ class PageController extends Controller
     {
        Page::destroy($id);
        return redirect()->route('adfm.pages.index');
+    }
+    
+    /**
+     * Восстановление страницы
+     */
+    public function restore($id)
+    {
+        $item = Page::withTrashed()->findOrFail($id);
+        $item->restore($id);
+        return redirect()->route('adfm.pages.index');
     }
 }
