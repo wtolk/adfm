@@ -1,0 +1,36 @@
+// CONTAINERS
+// ==============================
+
+.container{
+    box-sizing: border-box;
+    padding: 0 $col-spacing/2;
+    margin: 0 auto;
+
+    @media (min-width: $bg-xs){
+        max-width: 100%;
+    }
+
+    @media (min-width: $bp-small){
+        max-width: $container-sm;
+    }
+
+    @media (min-width: $bp-medium){
+        max-width: $container-md;
+    }
+
+    @media (min-width: $bp-large){
+        max-width: $container-lg;
+    }
+
+    @media (min-width: $bp-xlarge){
+        max-width: $container-xl;
+    }
+
+    @media (min-width: $bp-xxlarge){
+        max-width: $container-xxl;
+    }
+}
+
+.container-fluid{
+    width: 100%;
+}

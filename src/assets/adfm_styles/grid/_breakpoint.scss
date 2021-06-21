@@ -1,0 +1,56 @@
+// BREAKPOINT MIXINS
+// ==============================
+
+$size-phone: 1px 768px;
+$size-pc: max 1024px;
+
+@mixin mq($width) {
+
+    @if type_of($width) == 'list' {
+        @if index($width, 'max') {
+            @media (max-width: nth($width, 2)) {
+                @content
+            }
+        } @else if index($width, 'min') {
+            @media (min-width: nth($width, 2)) {
+                @content
+            }
+        } @else {
+            @media (min-width: nth($width, 1)) and (max-width: nth($width, 2)) {
+                @content
+            }
+        }
+
+        @if index($width, 'min') {
+            @media (min-width: $width) {
+                @content
+            }
+        }
+
+
+    } else {
+    @media (max-width: $width) {
+        @content
+    }
+}
+
+
+}
+
+@mixin breakpoint-min($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin breakpoint-max($bp) {
+    @media (max-width: $bp) {
+        @content;
+    }
+}
+
+@mixin breakpoint-min-max($bp1, $bp2) {
+    @media (min-width: $bp1) and (max-width: $bp2) {
+        @content;
+    }
+}
