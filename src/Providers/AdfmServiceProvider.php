@@ -51,6 +51,7 @@ class AdfmServiceProvider extends ServiceProvider
         $this->setViewHelpers();
 
         $this->publishes([
+            __DIR__.'/../assets' => public_path('vendor/wtolk/adfm/'),
             __DIR__.'/../Controllers' => app_path('Http/Controllers'),
             __DIR__.'/../Models' => app_path('Models/Adfm'),
             __DIR__.'/../views' => resource_path('views/adfm'),

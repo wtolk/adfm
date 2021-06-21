@@ -1,0 +1,37 @@
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    box-sizing: border-box;
+}
+
+table{
+    font-size: 14px;
+    line-height: 21px;
+
+    caption-side: bottom;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    box-sizing: border-box;
+
+    &>tbody {
+        vertical-align: inherit;
+    }
+}
+
+tr:nth-child(odd){
+    background: #EEE;
+}
+
+th {
+    text-align: -webkit-match-parent;
+}
+
+th, td{
+    padding: 8px;
+    border-bottom-width: 1px;
+}

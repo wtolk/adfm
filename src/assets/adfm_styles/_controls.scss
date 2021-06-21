@@ -1,0 +1,180 @@
+.field {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 0px 16px 0px;
+    &.no-bg {
+        margin: 0 0px 16px 0px;
+        border: 0;
+        background: none;
+        padding: 0 10px;
+    }
+    label {
+        // display: block;
+        max-width: 100%;
+        font-size: 16px;
+        line-height: 21px;
+    }
+    input {
+        margin: 0;
+        font-size: 16px;
+        color: #252525;
+        background-color: #fff;
+        background-image: none;
+        // box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-sizing: border-box;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        &:focus {
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        }
+    }
+    textarea {
+        width: 100%;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        padding: 8px 0 8px 10px;
+        resize: vertical;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        &:focus {
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        }
+    }
+    input[type=text], input[type=email], input[type=password], .chosen-container-multi .chosen-choices {
+        width: 100%;
+        height: 36px;
+        display: block;
+        border: 1px solid #CACACA;
+        // font-size: 16px;
+        padding: 8px 0 8px 10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input[type=submit], input[type=button]{
+        @extend .button;
+    }
+
+    input[type=checkbox] {
+        margin-right: 5px;
+    }
+
+    .selectize-control{
+        .selectize-input{
+            &.input-active{
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            }
+            .item{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+input[type=submit], input[type=button]{
+    @extend .button;
+}
+
+.chosen-container {
+    margin: 0 0 16px 0;
+}
+
+
+.checkbox {
+    input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+    /* для элемента label, связанного с .custom-checkbox */
+    input+label {
+        display: inline-flex;
+        align-items: center;
+        user-select: none;
+    }
+    /* создание в label псевдоэлемента before со следующими стилями */
+    input+label::before {
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 1px solid #adb5bd;
+        margin-right: 0.5em;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+    }
+    /* стили при наведении курсора на checkbox */
+    input:not(:disabled):not(:checked)+label:hover::before {
+        border-color: #b3d7ff;
+    }
+    /* стили для активного чекбокса (при нажатии на него) */
+    input:not(:disabled):active+label::before {
+        background-color: #b3d7ff;
+        border-color: #b3d7ff;
+    }
+    /* стили для чекбокса, находящегося в фокусе */
+    input:focus+label::before {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+    input:focus:not(:checked)+label::before {
+        border-color: #80bdff;
+    }
+
+    /* стили для чекбокса, находящегося в состоянии checked */
+    input:checked+label::before {
+        border-color: #24A841;
+        background-color: #24A841;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='rgb(255, 255, 255)' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    }
+
+    /* стили для чекбокса, находящегося в состоянии disabled */
+    input:disabled+label::before {
+        background-color: #e9ecef;
+    }
+}
+
+.select-time input {
+    display: inline-block;
+    width: 100px;
+    padding: 2px;
+}
+
+.button {
+    cursor: pointer;
+    height: 32px;
+    background: #4C68EF;
+    box-shadow: 0px 5px 10px #4C68EF;
+    font-size: 14px;
+    line-height: 14px;
+    vertical-align: middle;
+    display: inline-block;
+    align-items: center;
+    padding: 9px 35px;
+    margin-right: 16px;
+    color: #FFFFFF;
+    border: none;
+    transition: all 0.15s ease-out 0s;
+    &:hover {
+        box-shadow: 0px 10px 20px #4C68EF;
+    }
+    .blue {background: #1992d5;}
+    .red {background: #d5197d;}
+    .cancel {background: #d54819;}
+    .confirm {background: #2fa030;}
+}
+
+button.link {
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
