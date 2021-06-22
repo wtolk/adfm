@@ -53,6 +53,16 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::match(['put', 'patch'],'/users/{id}', 'UserController@update')->name('adfm.users.update');
         Route::delete('/users/{id}', 'UserController@destroy')->name('adfm.users.destroy');
 
+    /* Роуты блоков */
+
+        Route::get('/blocks', 'BlockController@index')->name('adfm.blocks.index');
+        Route::get('/blocks/create', 'BlockController@create')->name('adfm.blocks.create');
+        Route::post('blocks', 'BlockController@store')->name('adfm.blocks.store');
+        Route::get('/blocks/{id}/edit', 'BlockController@edit')->name('adfm.blocks.edit');
+        Route::match(['put', 'patch'],'/blocks/{id}', 'BlockController@update')->name('adfm.blocks.update');
+        Route::delete('/blocks/{id}', 'BlockController@destroy')->name('adfm.blocks.destroy');
+        
+
         /* Роуты для сообщений */
 
         Route::get('/feedbacks', 'FeedbackController@index')->name('adfm.feedbacks.index');
