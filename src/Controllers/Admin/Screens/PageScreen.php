@@ -13,6 +13,7 @@ use Wtolk\Crud\Form\File;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\MultiFile;
 use Wtolk\Crud\Form\Summernote;
+use Wtolk\Crud\Form\TinyMCE;
 use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\FormPresenter;
 use App\Models\Adfm\Page;
@@ -134,7 +135,7 @@ class PageScreen
                     ->required()
                     ->placeholder('Например , контакты организации.'),
                 Checkbox::make('page.options.editor_dev_mode')->title('Режим разработчика'),
-                Summernote::make('page.content')->title('Содержимое'),
+                TinyMCE::make('page.content')->title('Содержимое'),
 
 //                File::make('page.image')->title('Изображение') ,
 
