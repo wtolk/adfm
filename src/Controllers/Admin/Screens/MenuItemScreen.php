@@ -120,7 +120,7 @@ class MenuItemScreen
                     ->title('Текст пункта меню')
                     ->placeholder('Например, главная'),
                 Checkbox::make('menuitem.is_published')->title('Опубликованно'),
-                Input::make('menuitem.link')
+                Input::make('menuitem.slug')
                     ->title('Ссылка')
                     ->placeholder('http://google.ru'),
                 Relation::make('menuitem.menu')->title('Выберите меню')

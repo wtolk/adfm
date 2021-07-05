@@ -101,6 +101,20 @@ class MenuItem extends Model
         return $this->belongsTo(Menu::class);
     }
 
+    public function getSlugAttribute()
+    {
+        $slug = $this->link;
+        if (substr($slug, 0, 4) == 'http') {
+
+            $url = new URL();
+            $r = $url->getFacadeRoot()->getRequest();
+
+            $slug = str_replace($r->getScheme().'://'.$r->getHost(), '', $slug);
+        }
+
+        return $slug;
+    }
+
     public function getLinkAttribute($value)
     {
         if (substr($value, 0, 4) == 'http') {
