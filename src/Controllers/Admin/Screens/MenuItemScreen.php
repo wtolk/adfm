@@ -116,7 +116,6 @@ class MenuItemScreen
     public static function getFields() {
         $item = MenuItem::find(request()->route('id'));
         $slug = $item != null ? $item->slug : '';
-
         return [
             Column::make([
                 Input::make('menuitem.title')
