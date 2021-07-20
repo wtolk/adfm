@@ -114,7 +114,8 @@ class MenuItemScreen
     }
 
     public static function getFields() {
-        $item = MenuItem::findOrFail(request()->route('id'));
+        $item = MenuItem::find(request()->route('id'));
+        $slug = $item != null ? $item->slug : '';
         return [
             Column::make([
                 Input::make('menuitem.title')
@@ -123,7 +124,7 @@ class MenuItemScreen
                 Checkbox::make('menuitem.is_published')->title('Опубликованно'),
                 Input::make('menuitem.link')
                     ->title('Ссылка')
-                    ->placeholder('http://google.ru')->defaultValue((string) $item->slug),
+                    ->placeholder('http://google.ru')->defaultValue((string) $slug),
                 Relation::make('menuitem.menu')->title('Выберите меню')
                     ->options( Menu::all()->pluck('title', 'id')->toArray())->defaultValue((int) request()->route('menu_id')),
                 Cropper::make('menuitem.image')->title('Изображение')->cropSize(350, 250)
