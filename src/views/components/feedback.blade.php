@@ -1,4 +1,5 @@
 <div id="{{$id}}" class="row feedbackform">
+    @honeypot
     @foreach($fields as $field)
         <div class="col col-12 col-md-8 col-md-offset-2 field-feedbackform">
         {!! $field !!}
