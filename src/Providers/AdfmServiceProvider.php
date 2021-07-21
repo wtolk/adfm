@@ -78,6 +78,9 @@ class AdfmServiceProvider extends ServiceProvider
 
         Blade::componentNamespace('App\\View\\Adfm\\Components', 'adfm');
 
+        $kernel = $this->app->make(\Illuminate\Contracts\Http\Kernel::class);
+        $kernel->pushMiddleware(\Spatie\Honeypot\ProtectAgainstSpam::class);
+
     }
 
     /**
