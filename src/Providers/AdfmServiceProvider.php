@@ -61,6 +61,8 @@ class AdfmServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations' => app_path('../database/migrations'),
             __DIR__.'/../database/factories' => app_path('../database/factories'),
             __DIR__.'/../tests' => base_path('/tests'),
+            __DIR__.'/../config' => config_path(),
+            __DIR__.'/../Observers' => app_path('Observers/Adfm'),
         ]);
 
         if (file_exists(base_path('/routes/adfm') . '/admin-routes.php')) {
@@ -80,6 +82,8 @@ class AdfmServiceProvider extends ServiceProvider
 
         $kernel = $this->app->make(\Illuminate\Contracts\Http\Kernel::class);
         $kernel->pushMiddleware(\Spatie\Honeypot\ProtectAgainstSpam::class);
+
+        \App\Models\Adfm\File::observe(\App\Observers\Adfm\FileObserver::class);
 
     }
 
