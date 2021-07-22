@@ -14,11 +14,13 @@ class FileObserver
      */
     public function created(File $file)
     {
-        if($file->fileable_type == 'App\Models\Adfm\Catalog\Product'){
-            foreach(config('image-cache.product') as $crop_config){
-                \ImageCache::get($file, $crop_config);
-            }
-        }
+        foreach(config('adfm.fileObserveableModels') as $key => $observeable_model){
+            if($file->fileable_type == $observeable_model){
+                foreach(config('image-cache.'.$key) as $crop_config){
+                    \ImageCache::get($file, $crop_config);
+                }
+            }   
+        }      
     }
 
     /**
