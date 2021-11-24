@@ -21,12 +21,6 @@ trait AttachmentTrait
     {
         if ($attributes) {
             foreach ($attributes as $key => $attribute) {
-//                if ($key == 'categories') {
-//
-////                    dd($this->isRelation($key, $attribute));
-//
-//                    \App\Adfm\Helpers\Dev::dd($this->$key(), $attribute);
-//                }
 
                 if ($this->isRelation($key)) {
                     $this->updateRelationsField($key, $attribute);
@@ -121,6 +115,8 @@ trait AttachmentTrait
                 $f->model_relation = $uploadedFile['model_relation'];
                 $f->upload();
             }
+            // Очищаем список, после загрузки
+            $model->filesNeedUploadedAfterSaving = [];
         });
     }
 
