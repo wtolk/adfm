@@ -1,0 +1,54 @@
+nav {
+    .navigation {
+        display: flex;
+        flex-flow: row wrap;
+        &.justify-center {justify-content: center;} // По центру
+        &.justify-start {justify-content: start;} // С начала
+        &.justify-end {justify-content: end;} // С конца
+        &.justify-flex-start {justify-content: flex-start;}
+        &.justify-flex-end {justify-content: flex-end;}
+        &.justify-space-between {justify-content: space-between;}
+        &.justify-space-around {justify-content: space-around;}
+        &.justify-space-evenly {justify-content: space-evenly;}
+        &.justify-stretch {justify-content: stretch;}
+
+        li {
+            margin: 10px 14px;
+            list-style: none;
+            position: relative;
+            a {
+                color: #fff;
+                line-height: 44px;
+                border-radius: 4px;
+                display: block;
+                padding: 0 10px;
+            }
+
+            ul.submenu {
+                display: none;
+                position: absolute;
+                width: 150px;
+                top: 44px;
+                left: 0;
+                z-index: 149;
+                height: auto;
+            }
+        }
+
+        li:hover {
+            a {
+                background: rgba(0,0,0,0.15);
+            }
+            ul.submenu {
+                display: block;
+                position: absolute;
+                a {
+                    background: none;
+                    &:hover {
+                        background: rgba(0,0,0,0.15);
+                    }
+                }
+            }
+        }
+    }
+}

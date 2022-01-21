@@ -148,33 +148,4 @@ input[type=submit], input[type=button]{
     padding: 2px;
 }
 
-.button {
-    cursor: pointer;
-    height: 32px;
-    background: #4C68EF;
-    box-shadow: 0px 5px 10px #4C68EF;
-    font-size: 14px;
-    line-height: 14px;
-    vertical-align: middle;
-    display: inline-block;
-    align-items: center;
-    padding: 9px 35px;
-    margin-right: 16px;
-    color: #FFFFFF;
-    border: none;
-    transition: all 0.15s ease-out 0s;
-    &:hover {
-        box-shadow: 0px 10px 20px #4C68EF;
-    }
-    .blue {background: #1992d5;}
-    .red {background: #d5197d;}
-    .cancel {background: #d54819;}
-    .confirm {background: #2fa030;}
-}
 
-button.link {
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-decoration: underline;
-}
