@@ -36,6 +36,7 @@
         "spatie/laravel-permission": "*",
         "league/flysystem-aws-s3-v3": "*",
         "kint-php/kint": "*",
-        "spatie/laravel-honeypot": "*"
+        "spatie/laravel-honeypot": "*",
+        "spatie/valuestore": "*"
     }
 }
