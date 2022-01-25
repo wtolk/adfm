@@ -69,6 +69,10 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/feedbacks/{id}/edit', 'FeedbackController@showMessageDetails')->name('adfm.feedbacks.edit');
         Route::delete('/feedbacks/{id}', 'FeedbackController@destroy')->name('adfm.feedbacks.destroy');
 
+        /* Роуты для настроек */
+        Route::get('/settings', 'SettingsController@index')->name('adfm.settings.index');
+        Route::match(['put', 'patch', 'post'], '/settings', 'SettingsController@update')->name('adfm.settings.update');
+        
 });
 //Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
 

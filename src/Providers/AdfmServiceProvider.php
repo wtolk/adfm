@@ -4,6 +4,7 @@ namespace Wtolk\Adfm\Providers;
 
 use App\Helpers\Adfm\ImageCache;
 use App\Helpers\Dev;
+use App\Helpers\Adfm\Settings;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -36,7 +37,9 @@ class AdfmServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Settings::class, function () {
+            return Settings::make(base_path('settings.json'));
+        });
     }
 
     /**
@@ -51,7 +54,8 @@ class AdfmServiceProvider extends ServiceProvider
         $this->setViewHelpers();
 
         $this->publishes([
-            __DIR__.'/../assets' => public_path('vendor/wtolk/adfm/'),
+            __DIR__.'/../assets/adfm_styles' => resource_path('scss'),
+            __DIR__.'/../assets/settings.json' => base_path('settings.json'),
             __DIR__.'/../Controllers' => app_path('Http/Controllers'),
             __DIR__.'/../Models' => app_path('Models/Adfm'),
             __DIR__.'/../views' => resource_path('views/adfm'),
