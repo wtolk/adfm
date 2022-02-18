@@ -56,6 +56,7 @@ class AdfmServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../assets/adfm_styles' => resource_path('scss'),
             __DIR__.'/../assets/settings.json' => base_path('settings.json'),
+            __DIR__.'/../assets/other/web.php' => base_path('routes/web.php'),
             __DIR__.'/../Controllers' => app_path('Http/Controllers'),
             __DIR__.'/../Models' => app_path('Models/Adfm'),
             __DIR__.'/../views' => resource_path('views/adfm'),
