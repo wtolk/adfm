@@ -25,7 +25,6 @@
     },
     "require": {
         "wtolk/crud": "*",
-        "wtolk/adfm-elfinder": "*",
         "ajthinking/archetype": "*",
         "jackiedo/dotenv-editor": "*",
         "laravel/fortify": "*",
