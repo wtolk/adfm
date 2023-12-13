@@ -2,8 +2,8 @@
 
 namespace Wtolk\Adfm\Commands;
 
-use App\Adfm\Models\Role;
-use Archetype\Factories\PHPFileFactory;
+use App\Models\Adfm\Role;
+use Archetype\Facades\PHPFile;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -33,8 +33,8 @@ class InstallSetUpCommand extends Command
 
     public function handle()
     {
-        $provider = PHPFileFactory::load(app_path('Providers/RouteServiceProvider.php'));
-        $provider->constant('HOME', '/pages')->save();
+        $provider = PHPFile::load(app_path('Providers/RouteServiceProvider.php'));
+        $provider->setClassConstant('HOME', '/pages')->save();
         $this->info('Настроен RouteServiceProvider.php');
         $this->createRolesAndPermissionsAndUsers();
         $this->info('Настроены роли и пользователи');
