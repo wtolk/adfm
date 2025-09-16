@@ -65,15 +65,10 @@ class File extends Model
     /**
      * @var UploadedFile
      */
-    protected $file;
-    protected $storage;
-    protected $time;
-    protected $mimes;
-
-
-    protected $disk;
-
-    protected $group;
+    protected UploadedFile $file;
+    protected Filesystem $storage;
+    protected MimeTypes $mimes;
+    protected string $disk;
 
     protected $fillable = [
         'name',
@@ -99,7 +94,7 @@ class File extends Model
     public static function make(UploadedFile $file)
     {
         $item = new self();
-        $item->disk = env('DEFAULT_FILE_STORAGE');
+        $item->disk = env('FILESYSTEM_DISK');
         $item->file = $file;
         $item->mimes = new MimeTypes();
         $item->storage = Storage::disk($item->disk);
@@ -108,7 +103,7 @@ class File extends Model
 
     public function name(): string
     {
-        return sha1(time().$this->file->getClientOriginalName());
+        return sha1(time() . $this->file->getClientOriginalName());
     }
 
     public function getPath(): string
@@ -117,27 +112,27 @@ class File extends Model
             throw new ErrorException('Нужно задать папку для yandex storage вида site.ru в файле .env
                 параметр - YANDEX_STORAGE_FOLDER или указать локальное хранилище', 500);
         }
-        return isset($this->path) ? $this->path.$this->name.'.'.$this->extension : 'user_files/'.date('Y/m/d', time()).$this->name.'.'.$this->extension;
+        return isset($this->path) ? $this->path . $this->name . '.' . $this->extension : 'user_files/' . date('Y/m/d', time()) . $this->name . '.' . $this->extension;
     }
 
-    public function getDirectory()
+    public function getDirectory(): string
     {
-        return isset($this->path) ? $this->path : 'user_files/'.date('Y/m/d', time());
+        return isset($this->path) ? $this->path : 'user_files/' . date('Y/m/d', time());
     }
 
-    public function getUrl()
+    public function getUrl(): string
     {
-        return Storage::disk($this->disk)->url($this->getDirectory().$this->filename);
+        return Storage::disk($this->disk)->url($this->getDirectory() . $this->filename);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return $this->getUrl();
     }
 
-    public function getFilenameAttribute()
+    public function getFilenameAttribute(): string
     {
-        return $this->name.'.'.$this->extension;
+        return $this->name . '.' . $this->extension;
     }
 
     public function extension(): string
@@ -155,7 +150,6 @@ class File extends Model
      */
     public function hash(): string
     {
-//        \App\Adfm\Helpers\Dev::dd($this->file->getPath());
         return sha1_file($this->file->path());
     }
 
@@ -171,8 +165,7 @@ class File extends Model
             ?? 'unknown';
     }
 
-
-    private function getMatchesHash()
+    private function getMatchesHash(): ?self
     {
         return self::where('hash', $this->hash())
             ->where('disk', $this->disk)
@@ -184,14 +177,13 @@ class File extends Model
      *
      * @param $path
      */
-    public function putFile($path, $name = null)
+    public function putFile($path, $name = null): void
     {
-        $name = ($name != null) ? $name : $this->name().'.'.$this->extension();
+        $name = ($name != null) ? $name : $this->name() . '.' . $this->extension();
         $this->storage->putFileAs($path, $this->file, $name);
     }
 
-
-    public function upload()
+    public function upload(): File|bool
     {
         $data = [
             'name'          => $this->name(),
@@ -226,14 +218,10 @@ class File extends Model
             'model_relation'    => $this->model_relation
         ]);
         $attachment->file = $this->file;
-        $attachment->time = time();
         $attachment->mimes = new MimeTypes();
         $attachment->storage = Storage::disk($this->disk);
         $attachment->save();
 
-
-
         return $attachment;
-
     }
 }
