@@ -9,7 +9,6 @@ use App\Models\Adfm\FeedbackMessage;
 
 class FeedbackController extends Controller
 {
-
     public function index()
     {
         FeedbackScreen::index();
@@ -22,8 +21,7 @@ class FeedbackController extends Controller
     {
         $item = new FeedbackMessage();
         $item->fill(['fields' => $request->all()['fields']])->save();
-        \Illuminate\Support\Facades\Mail::send('adfm::email.feedback', ['item' => $item], function($message)
-        {
+        \Illuminate\Support\Facades\Mail::send('adfm::email.feedback', ['item' => $item], function ($message) {
             $message->from('info@mail-robot.wtolk.ru', 'Почтовый робот');
             $message->to('misha-seryak@ya.ru')->subject('Сообщение с сайта Энесай');
         });

@@ -11,12 +11,13 @@ use App\Models\Adfm\User;
 class PageTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_create_page()
+    public function testCreatePage()
     {
         $user = User::factory()->create();
 
@@ -40,7 +41,7 @@ class PageTest extends TestCase
         ]);
     }
 
-    public function test_update_page()
+    public function testUpdatePage()
     {
         $user = User::factory()->create();
 
@@ -70,7 +71,7 @@ class PageTest extends TestCase
         ]);
     }
 
-    public function test_delete_page()
+    public function testDeletePage()
     {
         $user = User::factory()->create();
 

@@ -8,7 +8,6 @@ use Wtolk\Adfm\Models\Page;
 
 class PageFactory extends Factory
 {
-
     protected $model = Page::class;
 
     public function definition()

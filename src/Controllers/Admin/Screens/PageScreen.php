@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin\Screens;
-
 
 use App\Helpers\Dev;
 use Whoops\Exception\ErrorException;
@@ -29,7 +27,6 @@ class PageScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -56,10 +53,9 @@ class PageScreen
         $screen->form->addField(
             TableField::make('', '')
             ->link(function ($model) {
-                if(!$model->trashed()){
+                if (!$model->trashed()) {
                     echo Link::make('Просмотр')->route('adfm.show.page', ['slug' => $model->slug])->render();
-                }
-                else{
+                } else {
                     echo Link::make('Восстановить')->route('adfm.pages.restore', ['id' => $model->id])->render();
                 }
             })
@@ -114,14 +110,16 @@ class PageScreen
         $screen->form->render();
     }
 
-    public static function getFilters() {
+    public static function getFilters()
+    {
         return [
             Input::make('filter.title:like')->title('Заголовок страницы')->setFilter(),
             Input::make('filter.content:like')->title('Текст страницы')->setFilter(),
         ];
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         $page = Page::find(request()->route('id'));
         $dev_mode = false;
         if (isset($page) && $page->options['editor_dev_mode'] == 1) {

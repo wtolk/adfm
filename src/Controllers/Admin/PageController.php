@@ -9,7 +9,6 @@ use App\Models\Adfm\Page;
 
 class PageController extends Controller
 {
-
     public function index()
     {
         PageScreen::index();
@@ -53,10 +52,10 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-       Page::destroy($id);
-       return redirect()->route('adfm.pages.index');
+        Page::destroy($id);
+        return redirect()->route('adfm.pages.index');
     }
-    
+
     /**
      * Восстановление страницы
      */

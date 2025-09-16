@@ -19,7 +19,6 @@ use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 
-
 class MenuItemScreen
 {
     public $form;
@@ -29,7 +28,6 @@ class MenuItemScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -43,14 +41,14 @@ class MenuItemScreen
             TableField::make('title', 'Название')
                 ->link(function ($model) {
                     echo Link::make($model->title)->route('adfm.menuitems.edit', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(
             TableField::make('delete', 'Операции')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.menuitems.destroy', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->buttons([
             Link::make('Добавить')->class('button')->icon('note')->route('adfm.menuitems.create')
@@ -113,7 +111,8 @@ class MenuItemScreen
         $screen->form->render();
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         $item = MenuItem::find(request()->route('id'));
         $slug = $item != null ? $item->slug : '';
         return [
@@ -126,7 +125,7 @@ class MenuItemScreen
                     ->title('Ссылка')
                     ->placeholder('http://google.ru')->defaultValue((string) $slug),
                 Relation::make('menuitem.menu')->title('Выберите меню')
-                    ->options( Menu::all()->pluck('title', 'id')->toArray())->defaultValue((int) request()->route('menu_id')),
+                    ->options(Menu::all()->pluck('title', 'id')->toArray())->defaultValue((int) request()->route('menu_id')),
                 Cropper::make('menuitem.image')->title('Изображение')->cropSize(350, 250)
             ])
         ];
@@ -141,7 +140,7 @@ class MenuItemScreen
     {
         $cols = $this->form->columns;
 
-        $model = '\App\Models\Adfm\\'.$this->request->route('model_name');
+        $model = '\App\Models\Adfm\\' . $this->request->route('model_name');
         // Проверяем интерфейс модели
         $object = new $model();
         $interfaces = class_implements($object);
@@ -152,8 +151,10 @@ class MenuItemScreen
         $object = $model::find($this->request->route('model_id'));
         if (is_null($object)) {
             throw new ErrorException(
-                'У модели '.$this->request->route('model_name').'
-                не найдена запись с id='.$this->request->route('model_id'), 500);
+                'У модели ' . $this->request->route('model_name') . '
+                не найдена запись с id=' . $this->request->route('model_id'),
+                500
+            );
         }
 
         if ($cols[0]->fields[0]->field_name == 'menuitem[title]' && $cols[0]->fields[2]->field_name == 'menuitem[link]') {
@@ -165,7 +166,5 @@ class MenuItemScreen
 
         $cols[0]->fields[] = Input::make('menuitem.model_name')->defaultValue($model)->setType('hidden');
         $cols[0]->fields[] = Input::make('menuitem.model_id')->defaultValue($object->id)->setType('hidden');
-
     }
-
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin\Screens;
-
 
 use App\Helpers\Adfm\Settings;
 use App\Helpers\Dev;
@@ -50,7 +48,8 @@ class SettingsScreen
         $screen->form->render();
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         return [
             Column::make([
                 Input::make('settings.frontpage.title')->title('Заголовок на главной')

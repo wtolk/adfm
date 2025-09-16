@@ -12,7 +12,6 @@ use Spatie\Valuestore\Valuestore;
 
 class SettingsController extends Controller
 {
-
     public function index(Settings $settings)
     {
         SettingsScreen::index($settings);

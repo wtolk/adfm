@@ -9,7 +9,6 @@ use App\Models\Adfm\MenuItem;
 
 class MenuItemController extends Controller
 {
-
     public function index()
     {
         MenuItemScreen::index();

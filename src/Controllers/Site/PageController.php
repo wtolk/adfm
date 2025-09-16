@@ -17,10 +17,8 @@ use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 use League\Glide\Server;
 
-
 class PageController extends Controller
 {
-
     public function showMainPage()
     {
         return view('adfm::public.index');
@@ -31,5 +29,4 @@ class PageController extends Controller
         $page = Page::where('slug', '=', $slug)->firstOrFail();
         return view('adfm::public.page', compact('page'));
     }
-
 }

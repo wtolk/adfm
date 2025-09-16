@@ -16,7 +16,6 @@ use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 
-
 class UserScreen
 {
     public $form;
@@ -26,7 +25,6 @@ class UserScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -41,7 +39,7 @@ class UserScreen
             TableField::make('title', 'Название')
                 ->link(function ($model) {
                     echo Link::make($model->name)->route('adfm.users.edit', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(TableField::make('role', 'Роль пользователя'));
@@ -49,7 +47,7 @@ class UserScreen
             TableField::make('delete', 'Операции')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.users.destroy', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->buttons([
             Link::make('Добавить')->class('button')->icon('note')->route('adfm.users.create')
@@ -96,7 +94,8 @@ class UserScreen
         $screen->form->render();
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         $user = User::find(request()->route('id'));
         $role_name = ($user && $user->getFirstRole()) ? $user->getFirstRole()->name : null;
         return [
@@ -106,10 +105,9 @@ class UserScreen
                 Input::make('user.password')->title('Пароль (введите новый пароль, если нужно изменить)')
                     ->defaultValue(''),
                 Select::make('role')->options(
-                        Role::all()->pluck('name', 'name')->toArray()
+                    Role::all()->pluck('name', 'name')->toArray()
                 )->title('Роль пользователя')->defaultValue($role_name),
             ])
         ];
     }
-
 }

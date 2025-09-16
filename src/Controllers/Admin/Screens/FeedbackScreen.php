@@ -15,7 +15,6 @@ use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 
-
 class FeedbackScreen
 {
     public $form;
@@ -25,7 +24,6 @@ class FeedbackScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -41,14 +39,14 @@ class FeedbackScreen
                     $fields = $model->fields;
                     $fields = array_values($fields);
                     echo Link::make(reset($fields))->route('adfm.feedbacks.edit', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(
             TableField::make('delete', 'Операции')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.feedbacks.destroy', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->build();
         $screen->form->render();
@@ -71,5 +69,4 @@ class FeedbackScreen
         $screen->form->build();
         $screen->form->render();
     }
-
 }

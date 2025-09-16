@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Adfm;
 
 use App\Helpers\Adfm\Dev;
@@ -55,7 +56,7 @@ class Menu extends Model
         $links = MenuItem::where('menu_id', $menu->id)->orderBy('position')->get();
         $tree = [];
         foreach ($links as $link) {
-            if ($uri == '/'.$link['link']) {
+            if ($uri == '/' . $link['link']) {
                 $link['status'] = 'active';
             }
             $tree[$link['parent_id']][] = $link;

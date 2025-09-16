@@ -11,12 +11,13 @@ use App\Models\Adfm\FeedbackMessage;
 class FeedbackTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_create_feedback()
+    public function testCreateFeedback()
     {
         $fields['fields'] = FeedbackMessage::factory()->make()->toArray();
 
@@ -28,7 +29,7 @@ class FeedbackTest extends TestCase
         ]);
     }
 
-    public function test_delete_feedback()
+    public function testDeleteFeedback()
     {
         $user = User::factory()->create();
 

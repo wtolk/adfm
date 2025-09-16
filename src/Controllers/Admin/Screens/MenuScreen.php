@@ -15,7 +15,6 @@ use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 
-
 class MenuScreen
 {
     public $form;
@@ -25,7 +24,6 @@ class MenuScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -40,14 +38,14 @@ class MenuScreen
             TableField::make('title', 'Название')
                 ->link(function ($model) {
                     echo Link::make($model->title)->route('adfm.menus.edit', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(
             TableField::make('delete', 'Операции')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.menus.destroy', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->buttons([
             Link::make('Добавить')->class('button')->icon('note')->route('adfm.menus.create')
@@ -95,7 +93,8 @@ class MenuScreen
         $screen->form->render();
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         return [
             Column::make([
                 Input::make('menu.title')
@@ -112,5 +111,4 @@ class MenuScreen
             ])->class('col col-md-6')
         ];
     }
-
 }

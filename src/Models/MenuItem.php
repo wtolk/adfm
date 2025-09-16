@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Adfm;
 
 use App\Helpers\Dev;
@@ -81,7 +82,7 @@ class MenuItem extends Model
         return $data;
     }
 
-    public function children_recursive()
+    public function childrenRecursive()
     {
         return $this->hasMany('App\Models\Adfm\MenuItem', 'parent_id');
     }
@@ -105,11 +106,10 @@ class MenuItem extends Model
     {
         $slug = $this->link;
         if (substr($slug, 0, 4) == 'http') {
-
             $url = new URL();
             $r = $url->getFacadeRoot()->getRequest();
 
-            $slug = str_replace($r->getScheme().'://'.$r->getHost(), '', $slug);
+            $slug = str_replace($r->getScheme() . '://' . $r->getHost(), '', $slug);
         }
 
         return $slug;
@@ -122,8 +122,10 @@ class MenuItem extends Model
         } else {
             $url = new URL();
             $r = $url->getFacadeRoot()->getRequest();
-            if (substr($value, 0, 1) != '/' ) { $value = '/'.$value; }
-            return $r->getScheme().'://'.$r->getHost().$value;
+            if (substr($value, 0, 1) != '/') {
+                $value = '/' . $value;
+            }
+            return $r->getScheme() . '://' . $r->getHost() . $value;
         }
     }
 }

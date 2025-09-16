@@ -8,10 +8,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
-
 class InstallSetUpCommand extends Command
 {
-
     protected $signature = 'adfm:setup' ;
     protected $description = 'Делает первичную настройку';
 
@@ -43,7 +41,7 @@ class InstallSetUpCommand extends Command
     public function createRolesAndPermissionsAndUsers()
     {
         foreach ($this->start_permissions as $permission_name) {
-            Permission::create(['name'=> $permission_name]);
+            Permission::create(['name' => $permission_name]);
         }
 
         $permissions = Permission::all();

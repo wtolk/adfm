@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Models\Adfm;
-
 
 use App\Helpers\Adfm\Dev;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -86,14 +84,16 @@ class Page extends Model implements ILinkMenu
     /**
      * @return string ссылка для меню
      */
-    public function getLinkPath() {
+    public function getLinkPath()
+    {
         return $this->slug;
     }
 
     /**
      * @return string Название ссылки для меню
      */
-    public function getLinkTitle() {
+    public function getLinkTitle()
+    {
         return $this->title;
     }
 //

@@ -9,7 +9,6 @@ use App\Models\Adfm\User;
 
 class UserController extends Controller
 {
-
     public function index()
     {
         UserScreen::index();

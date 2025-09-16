@@ -11,12 +11,13 @@ use App\Models\Adfm\Menu;
 class MenuTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_create_menu()
+    public function testCreateMenu()
     {
         $user = User::factory()->create();
 
@@ -28,7 +29,7 @@ class MenuTest extends TestCase
         $this->assertDatabaseHas('menus', $item['menu']);
     }
 
-    public function test_update_menu()
+    public function testUpdateMenu()
     {
         $user = User::factory()->create();
 
@@ -43,7 +44,7 @@ class MenuTest extends TestCase
         $this->assertDatabaseHas('menus', $item['menu']);
     }
 
-    public function test_delete_menu()
+    public function testDeleteMenu()
     {
         $user = User::factory()->create();
 

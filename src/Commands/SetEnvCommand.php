@@ -6,10 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Wtolk\Crud\Generator;
 
-
 class SetEnvCommand extends Command
 {
-
     protected $signature = 'adfm:set_env {key : ключ конфига} {value : значение конфига}' ;
     protected $description = 'Задает настройки в конфиге';
 

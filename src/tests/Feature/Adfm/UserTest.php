@@ -10,12 +10,13 @@ use App\Models\Adfm\User;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_create_user()
+    public function testCreateUser()
     {
         $user = User::factory()->create();
 
@@ -31,7 +32,8 @@ class UserTest extends TestCase
             'email' => $new_user['user']['email'],
         ]);
     }
-    public function test_update_user()
+
+    public function testUpdateUser()
     {
         $user = User::factory()->create();
 
@@ -54,7 +56,8 @@ class UserTest extends TestCase
             'email' => $new_user['user']['email'],
         ]);
     }
-    public function test_delete_user()
+
+    public function testDeleteUser()
     {
         $user = User::factory()->create();
 

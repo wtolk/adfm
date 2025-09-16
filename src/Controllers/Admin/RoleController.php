@@ -9,7 +9,6 @@ use App\Models\Adfm\Role;
 
 class RoleController extends Controller
 {
-
     public function index()
     {
 //        phpinfo();

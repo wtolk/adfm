@@ -16,7 +16,6 @@ use Wtolk\Crud\Form\TableField;
 use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 
-
 class RoleScreen
 {
     public $form;
@@ -26,7 +25,6 @@ class RoleScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -40,14 +38,14 @@ class RoleScreen
             TableField::make('name', 'Название')
                 ->link(function ($model) {
                     echo Link::make($model->name)->route('adfm.roles.edit', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->addField(TableField::make('created_at', 'Дата создания'));
         $screen->form->addField(
             TableField::make('delete', 'Операции')
                 ->link(function ($model) {
                     echo Link::make('Удалить')->route('adfm.roles.destroy', ['id' => $model->id])->render();
-            })
+                })
         );
         $screen->form->buttons([
             Link::make('Добавить')->class('button')->icon('note')->route('adfm.roles.create')
@@ -92,7 +90,8 @@ class RoleScreen
         $screen->form->render();
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         return [
             Column::make([
                 Input::make('role.name')
@@ -110,5 +109,4 @@ class RoleScreen
             ])->class('col col-md-6')
         ];
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Adfm\Traits;
 
 use App\Helpers\Dev;
@@ -14,6 +15,7 @@ trait AttachmentTrait
 {
     use Notifiable;
     use Filter;
+
     public $filesNeedUploadedAfterSaving = [];
     public $filesNeedDeletedAfterSaving = [];
 
@@ -21,7 +23,6 @@ trait AttachmentTrait
     {
         if ($attributes) {
             foreach ($attributes as $key => $attribute) {
-
                 if ($this->isRelation($key)) {
                     $this->updateRelationsField($key, $attribute);
                 }
@@ -45,7 +46,6 @@ trait AttachmentTrait
                         );
                         $attribute = $file;
                     }
-
                 }
 
                 if ($this->isAttributeMultiFileField($key, $attribute)) {
@@ -54,7 +54,7 @@ trait AttachmentTrait
                     $attribute['uploader']['remove'] = json_decode($attribute['uploader']['remove'], true);
                     // Если есть загруженные файлы, добавить в очередь на загрузку
                     if (isset($attribute['files'])) {
-                        foreach($attribute['files'] as $i => $file) {
+                        foreach ($attribute['files'] as $i => $file) {
                             foreach ($positions as $position) {
                                 if ($position['filename'] == $file->getClientOriginalName()) {
                                     $file->sort = $position['sort'];
@@ -82,12 +82,11 @@ trait AttachmentTrait
 //                    $this->filesNeedUploadedAfterSaving[] = ['model_relation' => $key, 'file' => $attribute];
 //                        $uploader = $attribute['uploader'];
 //                    dd($key, $attribute, 'tut', $uploader);
-
                 }
 
                 if ($this->isAttributeUploadedFile($key, $attribute)) {
                     // Отдельное свойство, из которого загружаются файлы после сохранения модели
-                    if(is_a($this->$key(), 'Illuminate\Database\Eloquent\Relations\MorphOne')) {
+                    if (is_a($this->$key(), 'Illuminate\Database\Eloquent\Relations\MorphOne')) {
                         $this->$key()->delete();
                     }
 
@@ -187,7 +186,9 @@ trait AttachmentTrait
         foreach ($attribute['files'] as $key => $fields) {
             dd($fields[0]);
             foreach ($fields as $i => $field) {
-                if (!isset($files_arr[$i])) $files_arr[$i] = [];
+                if (!isset($files_arr[$i])) {
+                    $files_arr[$i] = [];
+                }
                 $files_arr[$i][$key] = $field;
             }
         }
@@ -209,8 +210,8 @@ trait AttachmentTrait
                 $user_files_id[] = $position['id'];
                 File::find($position['id'])->update(['position' => $key + 1]);
             } else {
-                foreach ($files as $file){
-                    if ($file->name == $position['filename']){
+                foreach ($files as $file) {
+                    if ($file->name == $position['filename']) {
                         $file->update(['position' => $key + 1]);
                         break;
                     }

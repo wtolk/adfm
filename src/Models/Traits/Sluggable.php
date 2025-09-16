@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Adfm\Traits;
 
 use Illuminate\Support\Str;
@@ -40,7 +41,8 @@ trait Sluggable
     public function slugInput($input)
     {
 
-        return Str::slug($input, '-', 'ru');;
+        return Str::slug($input, '-', 'ru');
+        ;
     }
 
     /**
@@ -48,7 +50,8 @@ trait Sluggable
      * @param $slug - исходный синоним
      * @return string - следующий синоним
      */
-    public function getNextSlug($record, $slug) {
+    public function getNextSlug($record, $slug)
+    {
         $searchString = "/^%s(%s[0-9]+)?$/"; // prepare regexp string to find exact match form return results
 
         $search = sprintf($searchString, $slug, '-');
@@ -59,11 +62,11 @@ trait Sluggable
             $endvalues[] = intval(end($pieces));
         }
         $lastDigit = max($endvalues);
-        $lastDigit = $lastDigit+1;
+        $lastDigit = $lastDigit + 1;
         if (count($pieces) > 1) {
             array_pop($pieces);
         }
-        $new_slug = implode('-', $pieces) . '-'. $lastDigit ;
+        $new_slug = implode('-', $pieces) . '-' . $lastDigit ;
         return $new_slug;
     }
 
@@ -73,7 +76,8 @@ trait Sluggable
      * @param $slug - синоним
      * @return bool - Возвращает false или существующий синоним
      */
-    public function checkIfSlugExist($slug) {
+    public function checkIfSlugExist($slug)
+    {
         $item = $this->where($this->getDestination(), '=', $slug)->where('id', '<>', $this->id)
             ->pluck($this->getDestination())
             ->toArray();

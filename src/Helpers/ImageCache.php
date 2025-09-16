@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Helpers\Adfm;
 
 use League\Glide\Responses\LaravelResponseFactory;
@@ -16,7 +15,8 @@ class ImageCache
     public $id;
     public $url;
 
-    public static function get($file, $params) {
+    public static function get($file, $params)
+    {
         $imageCache = new self();
 
         $server = \League\Glide\ServerFactory::create([
@@ -31,17 +31,18 @@ class ImageCache
         ]);
 
         $st = Storage::disk($file->disk);
-        $url = $st->url($server->getCachePath($file->getPath(), $params ));
-        if (!Cache::has($server->getCachePath($file->getPath(), $params ))) {
-            $server->makeImage($file->getPath(), $params );
+        $url = $st->url($server->getCachePath($file->getPath(), $params));
+        if (!Cache::has($server->getCachePath($file->getPath(), $params))) {
+            $server->makeImage($file->getPath(), $params);
             Cache::forever($server->getCachePath($file->getPath(), $params), $url);
         }
         $imageCache->url = $url;
         return $imageCache;
     }
 
-    public function __toString() {
-        return '<img class="'.$this->class_name.'" src="'. $this->url .'"  alt="'.$this->alt.'" title="'.$this->title.'"/>';
+    public function __toString()
+    {
+        return '<img class="' . $this->class_name . '" src="' . $this->url . '"  alt="' . $this->alt . '" title="' . $this->title . '"/>';
     }
 
     public function title($title)

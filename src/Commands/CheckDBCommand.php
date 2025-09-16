@@ -6,10 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Wtolk\Crud\Generator;
 
-
 class CheckDBCommand extends Command
 {
-
     protected $signature = 'adfm:check_db {db : Имя базы данных}' ;
     protected $description = 'Проверяет существует ли база данных';
 

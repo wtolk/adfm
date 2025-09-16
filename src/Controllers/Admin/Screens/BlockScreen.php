@@ -20,7 +20,6 @@ use Wtolk\Crud\Form\Link;
 use Wtolk\Crud\Form\Button;
 use App\Models\Adfm\Block;
 
-
 class BlockScreen
 {
     public $form;
@@ -30,7 +29,6 @@ class BlockScreen
     {
         $this->form = new FormPresenter();
         $this->request = request();
-
     }
 
     public static function index()
@@ -98,13 +96,15 @@ class BlockScreen
         $screen->form->render();
     }
 
-    public static function getFilters() {
+    public static function getFilters()
+    {
         return [
             Input::make('filter.title:like')->title('Название Блока')->setFilter(),
         ];
     }
 
-    public static function getFields() {
+    public static function getFields()
+    {
         return [
             Column::make([
                 Input::make('block.title')->title('Название')->required(),

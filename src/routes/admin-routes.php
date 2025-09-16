@@ -7,7 +7,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/pages/create', 'PageController@create')->name('adfm.pages.create');
         Route::post('/pages', 'PageController@store')->name('adfm.pages.store');
         Route::get('/pages/{id}/edit', 'PageController@edit')->name('adfm.pages.edit');
-        Route::match(['put', 'patch'],'/pages/{id}', 'PageController@update')->name('adfm.pages.update');
+        Route::match(['put', 'patch'], '/pages/{id}', 'PageController@update')->name('adfm.pages.update');
         Route::delete('/pages/{id}', 'PageController@destroy')->name('adfm.pages.destroy');
         Route::get('/pages/{id}', 'PageController@restore')->name('adfm.pages.restore');
 //Route::get('/pages/{id}/clone', 'PageController@clone');
@@ -19,7 +19,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/menus/create', 'MenuController@create')->name('adfm.menus.create');
         Route::post('/menus', 'MenuController@store')->name('adfm.menus.store');
         Route::get('/menus/{id}/edit', 'MenuController@edit')->name('adfm.menus.edit');
-        Route::match(['put', 'patch'],'/menus/{id}', 'MenuController@update')->name('adfm.menus.update');
+        Route::match(['put', 'patch'], '/menus/{id}', 'MenuController@update')->name('adfm.menus.update');
         Route::delete('/menus/{id}', 'MenuController@destroy')->name('adfm.menus.destroy');
 
 
@@ -30,7 +30,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/menuitems/create/{menu_id?}/{model_name}/{model_id}', 'MenuItemController@createFromModel')->name('adfm.menuitems.createFromModel');
         Route::post('/menuitems', 'MenuItemController@store')->name('adfm.menuitems.store');
         Route::get('/menuitems/{id}/edit', 'MenuItemController@edit')->name('adfm.menuitems.edit');
-        Route::match(['put', 'patch'],'/menuitems/{id}', 'MenuItemController@update')->name('adfm.menuitems.update');
+        Route::match(['put', 'patch'], '/menuitems/{id}', 'MenuItemController@update')->name('adfm.menuitems.update');
         Route::delete('/menuitems/{id}', 'MenuItemController@destroy')->name('adfm.menuitems.destroy');
 
 
@@ -40,7 +40,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/roles/create', 'RoleController@create')->name('adfm.roles.create');
         Route::post('/roles', 'RoleController@store')->name('adfm.roles.store');
         Route::get('/roles/{id}/edit', 'RoleController@edit')->name('adfm.roles.edit');
-        Route::match(['put', 'patch'],'/roles/{id}', 'RoleController@update')->name('adfm.roles.update');
+        Route::match(['put', 'patch'], '/roles/{id}', 'RoleController@update')->name('adfm.roles.update');
         Route::delete('/roles/{id}', 'RoleController@destroy')->name('adfm.roles.destroy');
 
 
@@ -50,7 +50,7 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/users/create', 'UserController@create')->name('adfm.users.create');
         Route::post('/users', 'UserController@store')->name('adfm.users.store');
         Route::get('/users/{id}/edit', 'UserController@edit')->name('adfm.users.edit');
-        Route::match(['put', 'patch'],'/users/{id}', 'UserController@update')->name('adfm.users.update');
+        Route::match(['put', 'patch'], '/users/{id}', 'UserController@update')->name('adfm.users.update');
         Route::delete('/users/{id}', 'UserController@destroy')->name('adfm.users.destroy');
 
     /* Роуты блоков */
@@ -59,9 +59,9 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         Route::get('/blocks/create', 'BlockController@create')->name('adfm.blocks.create');
         Route::post('blocks', 'BlockController@store')->name('adfm.blocks.store');
         Route::get('/blocks/{id}/edit', 'BlockController@edit')->name('adfm.blocks.edit');
-        Route::match(['put', 'patch'],'/blocks/{id}', 'BlockController@update')->name('adfm.blocks.update');
+        Route::match(['put', 'patch'], '/blocks/{id}', 'BlockController@update')->name('adfm.blocks.update');
         Route::delete('/blocks/{id}', 'BlockController@destroy')->name('adfm.blocks.destroy');
-        
+
 
         /* Роуты для сообщений */
 
@@ -72,8 +72,5 @@ Route::prefix('/admin')->middleware(['web', 'auth'])->namespace('App\Http\Contro
         /* Роуты для настроек */
         Route::get('/settings', 'SettingsController@index')->name('adfm.settings.index');
         Route::match(['put', 'patch', 'post'], '/settings', 'SettingsController@update')->name('adfm.settings.update');
-        
 });
 //Route::get('/setup-adfm', [\Wtolk\Adfm\Controllers\SetupController::class, 'setUpProviders'])->name('adfm.start');
-
-
